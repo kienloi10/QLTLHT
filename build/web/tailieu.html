@@ -1,0 +1,84 @@
+    <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+       
+        <script>
+            var bd = "";
+
+            function tailieu() {
+                var kq = "";
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("get", "assets/jsp/tailieu.jsp", false);
+                xmlhttp.send();
+
+                var nhan = xmlhttp.responseText.trim();
+                
+                if (nhan === "empty")
+                {
+                    alert("rong");
+                }
+                bd = JSON.parse(nhan);
+               
+                kq = "<ul>";
+                for (var i = 0; i < bd.length; i++) {
+                    
+                    kq +=   "<li class='item'><h2>" + bd[i].tentailieu + "</h2>"
+                            + "<p>Thể loại: </p>"
+                            + "<a class='type'>"+ bd[i].tenloaitailieu
+//                            + "<p>Download:</p>"
+                            + "<a class='filename' href='assets/jsp/download.jsp?filename=" + bd[i].tenfile + "'>Download</a><br>"
+                            + "</a></li>";
+
+                }
+                kq += "</ul>";
+                document.getElementById("thongdiep").innerHTML = kq;
+            }
+
+//'<a href="assets/jsp/download.jsp?filename=' + bd[i].tenloaitailieu + '">'
+//"<a href='assets/jsp/download.jsp?filename=" + bd[i].tenloaitailieu + "'>"
+        </script>
+
+    </head>
+    <body style="width: 700px;">
+<!--        <a href="download">download file</a>
+        <input type="text" name="name">
+        <input type="submit" value="OK">-->
+        <div id="thongdiep"></div>
+        
+        <div>
+            <script>
+                tailieu();
+            </script>
+        </div>
+        <!--        <div>
+                    <ul>
+                        <li>
+                            <a>Tieu de</a>
+                            <p>Nội dung</p>
+                            <a href="#">Download</a>
+                        </li>
+                        <li>
+                            <a>Tieu de</a>
+                            <p>Nội dung</p>
+                            <a href="#">Download</a>
+                        </li>
+                        <li>
+                            <a>Tieu de</a>
+                            <p>Nội dung</p>
+                            <a href="#">Download</a>
+                        </li>
+                    </ul>
+                    
+                    
+                </div>-->
+    </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+            
+                
+        </style>
+        <script>
+            
+            function allUser() {
+                var bd = "";
+                var kq = "";
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("get", "jsp/user/user.jsp", false);
+                xmlhttp.send();
+
+                var nhan = xmlhttp.responseText.trim();
+                
+                if (nhan === "empty")
+                {
+                    alert("rong");
+                }
+                bd = JSON.parse(nhan);
+                kq = "";
+                for (var i = 0; i < bd.length; i++) {
+                    
+                    kq +=   "<div class='col-sm-3'>"+bd[i].username + "</div>"
+                            + "<div class='col-sm-3'>" + bd[i].password + "</div>"
+                            + "<div class='col-sm-3'>" + bd[i].hoten + "</div>"
+                            + "<div class='col-sm-3'>\n\
+                               <button class='btn btn-success' onclick='editUser("+bd[i].id+")'>Sửa</button>\n\
+                                <button class='btn btn-primary' onclick='delUser("+bd[i].id +")'>Xóa</button>\n\
+                               </div>"  ;            
+                }
+                
+               
+                document.getElementById("user").innerHTML = kq;
+            }
+            
+            function delUser(id){
+                if (confirm("Are you sure?"))
+                {
+                    var bd = "";
+                    var kq = "";
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET","jsp/user/delUser.jsp?id="+id,false);       
+                    xmlHttp.send();
+                    allUser();
+                }
+            }
+                
+             function editUser(idFind){
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET","jsp/user/1user.jsp?idFind="+idFind,false);       
+                    xmlHttp.send();
+                    var nhan = xmlHttp.responseText.trim();               
+                    var bd = JSON.parse(nhan);
+                    var kq="";
+                    kq +=   "<div class='col-sm-3'><input type='text' value='"+bd.username + "'></div>"
+                            + "<div class='col-sm-3'><input type='text' value='" + bd.password + "'></div>"
+                            + "<div class='col-sm-3'><input type='text' value='" + bd.hoten + "'></div>"
+                            + "<div class='col-sm-3'>\n\
+                               <button class='btn btn-success'>Xác nhận</button>\n\
+                                <button class='btn btn-primary'>Hủy</button>\n\
+                               </div>"  ;
+                     document.getElementById("user").innerHTML = kq;       
+              
+             }   
+                
+            
+            </script>
+        
+    </head>
+    <body >
+        <button style="float: right;" class="btn-warning">Add</button><br>    
+        <div class="row ">
+            <div class="col-sm-3"><dt>Username</dt></div>
+            <div class="col-sm-3"><dt>Password</dt></div>
+            <div class="col-sm-3"><dt>Họ và tên </dt></div>
+            <div class="col-sm-3"><strong>Thao tác</strong></div>
+                             
+        </div>      
+        
+        <div id="user"></div>
+        <div>
+            <script>
+                allUser();
+            </script>
+        </div>
+        
+        
+       
+    </body>
+</html>

@@ -1,0 +1,20 @@
+SMAP
+xoafile_jsp.java
+JSP
+*S JSP
+*F
++ 0 xoafile.jsp
+assets/jsp/xoafile.jsp
++ 1 Connect.jsp
+assets/jsp/Connect.jsp
++ 2 Disconnect.jsp
+assets/jsp/Disconnect.jsp
+*L
+1,5:56
+1#1,9:60
+5#0:69
+8,14:72
+21:86
+2#2,3:88
+22#0:91
+*E

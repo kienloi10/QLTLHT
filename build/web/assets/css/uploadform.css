@@ -1,0 +1,49 @@
+#upload_form{
+    margin-top:25px;
+    padding: 25px;
+    border: skyblue groove 1px;;
+    background-color: whitesmoke;
+}
+input[type="file"]{
+    position: relative;
+    margin-bottom: 20px;
+    width: 85%;
+    height: 24px;
+    left: 60px;
+    border: grey groove 1px;
+    font-size: 16px;
+    font-family: serif;
+}
+input[type="text"]{
+    position: relative;
+    margin-bottom: 20px;
+    width: 85%;
+    height: 22px;
+    left: 13px;
+    border: gray groove 1px;
+    border-bottom-style: double;
+    font-size: 18px;
+    font-family: serif;
+}
+#datatypes_form_inside{
+    position: relative;
+    margin-bottom: 20px;
+    width: 85%;
+    height: 22px;
+    left: 10px;
+    border: gray groove 1px;
+    border-bottom-style: double;
+}
+input[type="submit"]{
+    width: 100px;;
+    height: 30px;
+    margin-left: 60%;
+    border-style: initial;
+    background-color: dodgerblue;
+    color: white;
+    font-size: 18px;
+    font-family: serif;
+}
+input[type="submit"]:hover{
+    background-color: orange;
+}

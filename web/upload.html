@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Upload</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+        
+        <script src="assets/javascript/myscripts.js"></script>
+    </head>
+    <body onload="loadLoaiTaiLieu()" style="width: 700px; height: 800px;">
+        <form id="upload_form">
+            <div>
+                <p class="p_in_form">File:         </p>
+                <input type="file" id="path" required style="background-color: white;"> <br>
+            </div>
+            <div>
+                <p class="p_in_form">Tên tài liệu: </p>
+                <input type="text" id="tentl" required> <br>
+            </div>
+            <div style="margin-bottom: 0px;">
+                <p class="p_in_form">Loại tài liệu:</p>
+                <select id="datatypes" style="width: 75%; height: 22px; float: right; margin-top: 12px;" required >    
+                </select>
+            </div>
+
+            <input type="submit" value="Upload">
+        </form>
+    </body>
+</html>

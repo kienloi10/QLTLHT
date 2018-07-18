@@ -1,0 +1,4 @@
+<%
+    stm.close();
+    con.close();
+%>
