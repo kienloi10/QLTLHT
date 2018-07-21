@@ -39,7 +39,7 @@ and open the template in the editor.
                             + "<div class='col-sm-3'>" + bd[i].password + "</div>"
                             + "<div class='col-sm-3'>" + bd[i].hoten + "</div>"
                             + "<div class='col-sm-3'>\n\
-                               <button class='btn btn-success' onclick='editUser("+bd[i].id+")'>Sửa</button>\n\
+                               <button class='btn btn-success' onclick='getUser("+bd[i].id+")'>Sửa</button>\n\
                                 <button class='btn btn-primary' onclick='delUser("+bd[i].id +")'>Xóa</button>\n\
                                </div>"  ;            
                 }
@@ -60,25 +60,38 @@ and open the template in the editor.
                 }
             }
                 
-             function editUser(idFind){
+             function getUser(idFind){
                     var xmlHttp = new XMLHttpRequest();
                     xmlHttp.open("GET","jsp/user/1user.jsp?idFind="+idFind,false);       
                     xmlHttp.send();
                     var nhan = xmlHttp.responseText.trim();               
                     var bd = JSON.parse(nhan);
                     var kq="";
-                    kq +=   "<div class='col-sm-3'><input type='text' value='"+bd.username + "'></div>"
-                            + "<div class='col-sm-3'><input type='text' value='" + bd.password + "'></div>"
-                            + "<div class='col-sm-3'><input type='text' value='" + bd.hoten + "'></div>"
+                    kq +=   "<div class='col-sm-3'><input type='text' id='editUser' value='"+bd.username + "'></div>"
+                            + "<div class='col-sm-3'><input type='text' id='editPwUser' value='" + bd.password + "'></div>"
+                            + "<div class='col-sm-3'><input type='text' id='editName' value='" + bd.hoten + "'></div>"
                             + "<div class='col-sm-3'>\n\
-                               <button class='btn btn-success'>Xác nhận</button>\n\
+                               <button class='btn btn-success' onclick='editUser("+bd.id+")'>Xác nhận</button>\n\
                                 <button class='btn btn-primary'>Hủy</button>\n\
                                </div>"  ;
                      document.getElementById("user").innerHTML = kq;       
               
              }   
                 
-            
+            function editUser(id){
+                var editUser = document.getElementById("editUser").value;
+                var editPwUser = document.getElementById("editPwUser").value;
+                var editName = document.getElementById("editName").value;
+                
+                var xmlHttp = new XMLHttpRequest();
+
+                xmlHttp.open("GET","jsp/user/updateUser.jsp?id="+id+"&editUser= " + editUser + "&editPwUser=" + editPwUser + "&editName="  + editName ,true);
+                xmlHttp.send();
+                alert("ĐÃ SỬA THÀNH CÔNG");
+                allUser()
+                
+                
+            }
             </script>
         
     </head>
