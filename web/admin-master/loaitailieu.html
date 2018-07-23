@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            function allLoaiTaiLieu(){
+                var bd = "";
+                var kq = "";
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("get", "jsp/loaitailieu/loaitailieu.jsp", false);
+                xmlhttp.send();
+
+                var nhan = xmlhttp.responseText.trim();
+                
+                if (nhan === "empty")
+                {
+                    alert("rong");
+                }
+                bd = JSON.parse(nhan);
+                kq = "";
+                for (var i = 0; i < bd.length; i++) {
+                    
+                    kq +=   "<div class='col-sm-4'>"+bd[i].id + "</div>"
+                            + "<div class='col-sm-4'>" + bd[i].tentailieu + "</div>"
+                            + "<div class='col-sm-4'>\n\
+                               <button class='btn btn-success' onclick='getLoaiTL("+bd[i].id+")'>Sửa</button>\n\
+                                <button class='btn btn-primary' onclick='delLoaiTL("+bd[i].id +")'>Xóa</button>\n\
+                               </div>"  ;            
+                }    
+                document.getElementById("loaitailieu").innerHTML = kq;
+            }
+            
+            function delLoaiTL(id){
+                if (confirm("Are you sure?"))
+                {
+                    var bd = "";
+                    var kq = "";
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET","jsp/loaitailieu/delLoaiTL.jsp?id="+id,false);       
+                    xmlHttp.send();
+                    allLoaiTaiLieu();
+                }
+            }
+            
+            function getLoaiTL(idFind){
+                 var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET","jsp/loaitailieu/1LoaiTL.jsp?idFind="+idFind,false);       
+                    xmlHttp.send();
+                    var nhan = xmlHttp.responseText.trim();               
+                    var bd = JSON.parse(nhan);
+                    var kq="";
+                    kq +=   "<div class='col-sm-4'>"+bd.id + "</div>"
+                            + "<div class='col-sm-4'><input type='text' id='editNameUser' value='" + bd.tentailieu + "'></div>"    
+                            + "<div class='col-sm-4'>\n\
+                               <button class='btn btn-success' onclick='editLoaiTL("+bd.id+")'>Xác nhận</button>\n\
+                                <button class='btn btn-primary'>Hủy</button>\n\
+                               </div>"  ;
+                     document.getElementById("loaitailieu").innerHTML = kq;    
+            }
+            
+            function editLoaiTL(id){
+                var editNameUser = document.getElementById("editNameUser").value;
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET","jsp/loaitailieu/updateLoaiTL.jsp?id="+id+"&editNameUser= " + editNameUser,true);
+                xmlHttp.send();
+                alert("ĐÃ SỬA THÀNH CÔNG");
+                allLoaiTaiLieu()
+                
+            }
+            
+            function addLoaiTL(){
+                var addTenTL = document.getElementById("addTenTL").value;
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET","jsp/loaitailieu/addLoaiTL.jsp?addTenTL="+addTenTL,true);
+                xmlHttp.send();
+                alert("ĐÃ THÊM THÀNH CÔNG");
+                allLoaiTaiLieu()
+            }
+            
+        </script>
+        
+        
+    </head>
+    <body>
+        <button style="float: right;" class="btn-warning" data-toggle="modal" data-target="#myModal">Add</button><br>    
+            
+        
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thêm Loại tài liệu</h4>
+                
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                  <strong>Tên loại tài liệu</strong><br>
+                  <input type="text" id="addTenTL" value="" placeholder="Tên loại tài liệu...">
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="addLoaiTL()">THÊM</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        <div class="row ">
+            <div class="col-sm-4"><dt>ID</dt></div>
+            <div class="col-sm-4"><dt>Tên tài liệu</dt></div>
+            <div class="col-sm-4"><strong>Thao tác</strong></div>
+                             
+        </div>      
+        
+        <div id="loaitailieu"></div>
+        <div>
+            <script>
+                allLoaiTaiLieu();
+            </script>
+        </div>
+    </body>
+</html>

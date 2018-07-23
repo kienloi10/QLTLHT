@@ -92,11 +92,63 @@ and open the template in the editor.
                 
                 
             }
+            
+            
+            function addUser(){
+                var addUsername = document.getElementById("addUsername").value;
+                var addPw = document.getElementById("addPw").value;
+                var addName = document.getElementById("addName").value;
+                
+                var xmlHttp = new XMLHttpRequest();
+
+                xmlHttp.open("GET","jsp/user/addUser.jsp?addUsername="+addUsername+"&addPw= " + addPw + "&addName=" + addName  ,true);
+                xmlHttp.send();
+                alert("ĐÃ THÊM THÀNH CÔNG");
+                allUser()
+            }
+            
             </script>
         
     </head>
     <body >
-        <button style="float: right;" class="btn-warning">Add</button><br>    
+        <button style="float: right;" class="btn-warning" data-toggle="modal" data-target="#myModal">Add</button><br>  
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thêm User</h4>
+                
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                  <strong>Username</strong><br>
+                  <input type="text" id="addUsername" value="" ><br>
+                  <strong>Password</strong><br>
+                  <input type="password" id="addPw" value="" ><br>
+                  <strong>Họ và tên</strong><br>
+                  <input type="text" id="addName" value="" ><br>
+                  
+                  
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="addUser()">THÊM</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
+        
         <div class="row ">
             <div class="col-sm-3"><dt>Username</dt></div>
             <div class="col-sm-3"><dt>Password</dt></div>
