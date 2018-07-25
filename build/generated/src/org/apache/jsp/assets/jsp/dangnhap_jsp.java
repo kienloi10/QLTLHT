@@ -1,16 +1,15 @@
-package org.apache.jsp.admin_002dmaster.jsp.loaitailieu;
+package org.apache.jsp.assets.jsp;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.Connection;
 
-public final class loaitailieu_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class dangnhap_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -19,8 +18,8 @@ public final class loaitailieu_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   static {
     _jspx_dependants = new java.util.ArrayList<String>(2);
-    _jspx_dependants.add("/admin-master/jsp/loaitailieu/../Connect.jsp");
-    _jspx_dependants.add("/admin-master/jsp/loaitailieu/../Disconnect.jsp");
+    _jspx_dependants.add("/assets/jsp/Connect.jsp");
+    _jspx_dependants.add("/assets/jsp/Disconnect.jsp");
   }
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
@@ -59,8 +58,6 @@ public final class loaitailieu_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
-      out.write("\n");
-      out.write("\n");
 
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     Connection con = DriverManager.getConnection(
@@ -69,26 +66,29 @@ public final class loaitailieu_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write('\n');
 
-    String s ="";
-    String sql = "select LOAITAILIEU ,MOTA from LOAITAILIEU ";
+//    String username = request.getParameter("username");
+//    String password = request.getParameter("password");
+
+
+    String username = "kienloi";
+    String password = "kienloi1";
+    
+    String sql = "SELECT PASSWORD,HOTEN FROM user WHERE USERNAME ='"+username+"'";
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
-        out.print("empty");
-        return;
+        out.print("false");
     } else {
-         s = "[";
-        do {
-            s += "{\"tentailieu\":\"" + rs.getString(1) + "\","
-                    + "\"mota\":\"" + rs.getString(2) + "\"},";
             
-        } while(rs.next());
+            String pw = rs.getString(1);
+            String name = rs.getString(2);
+            if (pw.equals(password))
+            {
+               out.print(name); 
+            }
+            else out.print("false");
+         }
 //        s = s.subSequence(0, s.length() - 1);
-        s = s.substring(0, s.length() - 1);
-        s += "]";
-//        s.trim();
-        rs.close();
-        out.print(s);
-    }
+        
 
       out.write('\n');
 

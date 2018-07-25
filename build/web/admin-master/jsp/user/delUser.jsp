@@ -7,7 +7,7 @@
 <%
     String id= request.getParameter("id");
   
-    String sql = "DELETE FROM user WHERE id= "+id;
+    String sql = "DELETE FROM user WHERE username= '"+id+"'";
     stm.executeUpdate(sql);
          
 %>

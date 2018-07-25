@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.Connection;
 
-public final class loaitailieu_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class addLoaiTL_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -68,28 +68,17 @@ public final class loaitailieu_jsp extends org.apache.jasper.runtime.HttpJspBase
     Statement stm = con.createStatement();
 
       out.write('\n');
+      out.write('\n');
 
-    String s ="";
-    String sql = "select LOAITAILIEU ,MOTA from LOAITAILIEU ";
-    ResultSet rs = stm.executeQuery(sql);
-    if (!rs.next()) {
-        out.print("empty");
-        return;
-    } else {
-         s = "[";
-        do {
-            s += "{\"tentailieu\":\"" + rs.getString(1) + "\","
-                    + "\"mota\":\"" + rs.getString(2) + "\"},";
-            
-        } while(rs.next());
-//        s = s.subSequence(0, s.length() - 1);
-        s = s.substring(0, s.length() - 1);
-        s += "]";
-//        s.trim();
-        rs.close();
-        out.print(s);
-    }
 
+    String addTenTL= request.getParameter("addTenTL");
+    String addKNTenTL= request.getParameter("addKNTenTL");
+    
+    String sql = "INSERT INTO loaitailieu(loaitailieu,nganh) VALUES ('Lap trinh c++','CNTT')";
+    stm.executeUpdate(sql);
+         
+
+      out.write('\n');
       out.write('\n');
 
     stm.close();

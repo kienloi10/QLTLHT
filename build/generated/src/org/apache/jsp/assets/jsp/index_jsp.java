@@ -1,16 +1,15 @@
-package org.apache.jsp.admin_002dmaster.jsp.loaitailieu;
+package org.apache.jsp.assets.jsp;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.Connection;
 
-public final class loaitailieu_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -19,8 +18,8 @@ public final class loaitailieu_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   static {
     _jspx_dependants = new java.util.ArrayList<String>(2);
-    _jspx_dependants.add("/admin-master/jsp/loaitailieu/../Connect.jsp");
-    _jspx_dependants.add("/admin-master/jsp/loaitailieu/../Disconnect.jsp");
+    _jspx_dependants.add("/assets/jsp/Connect.jsp");
+    _jspx_dependants.add("/assets/jsp/Disconnect.jsp");
   }
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
@@ -59,8 +58,6 @@ public final class loaitailieu_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
-      out.write("\n");
-      out.write("\n");
 
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     Connection con = DriverManager.getConnection(
@@ -69,27 +66,17 @@ public final class loaitailieu_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write('\n');
 
-    String s ="";
-    String sql = "select LOAITAILIEU ,MOTA from LOAITAILIEU ";
+    String sql = "select loaitailieu from loaitailieu";
+    String ketQua = "";
     ResultSet rs = stm.executeQuery(sql);
-    if (!rs.next()) {
-        out.print("empty");
-        return;
-    } else {
-         s = "[";
-        do {
-            s += "{\"tentailieu\":\"" + rs.getString(1) + "\","
-                    + "\"mota\":\"" + rs.getString(2) + "\"},";
-            
-        } while(rs.next());
-//        s = s.subSequence(0, s.length() - 1);
-        s = s.substring(0, s.length() - 1);
-        s += "]";
-//        s.trim();
-        rs.close();
-        out.print(s);
+    while(rs.next()){
+        String tentl = rs.getString(1);
+        ketQua += tentl + ",";
     }
+    rs.close();
+    out.print(ketQua);
 
+      out.write('\n');
       out.write('\n');
 
     stm.close();

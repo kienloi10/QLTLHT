@@ -8,8 +8,10 @@
 <%
 
     String addTenTL= request.getParameter("addTenTL");
+    String addKNTenTL= request.getParameter("addKNTenTL");
     
-    String sql = "INSERT INTO loaitailieu(tentailieu) VALUES ('"+addTenTL+"')";
+    
+    String sql = "INSERT INTO loaitailieu(loaitailieu,nganh) VALUES ('"+addTenTL+"','"+addKNTenTL+"')";
     stm.executeUpdate(sql);
          
 %>

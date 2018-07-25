@@ -3,11 +3,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="Connect.jsp" %>
 <%
-    String sql = "select * from loaitailieu";
+    String sql = "select loaitailieu from loaitailieu";
     String ketQua = "";
     ResultSet rs = stm.executeQuery(sql);
     while(rs.next()){
-        String tentl = rs.getString(2);
+        String tentl = rs.getString(1);
         ketQua += tentl + ",";
     }
     rs.close();

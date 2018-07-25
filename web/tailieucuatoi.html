@@ -34,7 +34,7 @@ and open the template in the editor.
                     
                     kq +=   "<li class='item'><h2>" + bd[i].tentailieu + "</h2>"
                             + "<p>Thể loại: </p>"
-                            + "<a class='type'>"+ bd[i].tenloaitailieu + "</a>"
+                            + "<a class='type'>"+ bd[i].loaitl + "</a>"
 //                            + "<p>Download:</p>"
                             + "<a class='filename' href='assets/jsp/download.jsp?filename=" + bd[i].tenfile + "'>Download</a>"
                             + "<button class='btndel' onclick='Deletetl(\""+ bd[i].tenfile +"\")'>Delete</button>"
@@ -46,14 +46,14 @@ and open the template in the editor.
             }
             
             function Deletetl(filename){
-//               alert(filename);
-                var yes = confirm("Xác nhận xóa tài liệu!");
-                if(yes){
-                    xhttp = new XMLHttpRequest();
-                    xhttp.open("GET","assets/jsp/xoafile.jsp?filename="+ filename.toString(),false);
-                    xhttp.send();
-                    tailieu();
-                }
+               alert(filename);
+//                var yes = confirm("Xác nhận xóa tài liệu!");
+//                if(yes){
+//                    xhttp = new XMLHttpRequest();
+//                    xhttp.open("GET","assets/jsp/xoafile.jsp?filename="+ filename.toString(),false);
+//                    xhttp.send();
+//                    tailieu();
+//                }
             }
         </script>
 

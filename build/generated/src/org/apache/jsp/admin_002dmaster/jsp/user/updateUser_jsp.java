@@ -70,19 +70,20 @@ public final class updateUser_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write('\n');
       out.write('\n');
 
-//    int id= Integer.parseInt(request.getParameter("id"));
-//    
+//    String a =request.getParameter("id") ;
+//    int id= Integer.parseInt(a);
+
+
 //    String editUser= request.getParameter("editUser");
 //    String editPwUser= request.getParameter("editPwUser");
 //    String editName = request.getParameter("editName");
     
-    String a = "2";
-    int id = Integer.parseInt(a);
+
     String editUser="truongloc";
-    String editPwUser= "truongloc";
+    String editPwUser= "truonglocnguyen";
     String editName= "Lộc A";
   
-    String sql = "UPDATE user SET username = '"+editUser+"',password='"+editPwUser+"',hoten='"+editName+"' WHERE id="+id;
+    String sql = "UPDATE user SET password='"+editPwUser+"',hoten='"+editName+"' WHERE username='"+editUser+"'";
     stm.executeUpdate(sql);
          
 

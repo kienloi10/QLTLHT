@@ -6,9 +6,9 @@
 <%@include file="Connect.jsp" %>
 <%
     String timkiem = request.getParameter("timkiem");
-//    String timkiem = "Toan hoc"; 
+    //String timkiem = "Lập trình Web"; 
     String s ="";
-    String sql = "SELECT tentailieu,tenfile,tenloaitailieu FROM tailieu WHERE tenloaitailieu = '" + timkiem + "' ";
+    String sql = "SELECT tentailieu,tenfile,loaitl FROM tailieu WHERE loaitl = '" + timkiem + "' ";
 //    String sql = "SELECT tentailieu,tenfile,tenloaitailieu FROM tailieu WHERE tenloaitailieu = 'Toan hoc' ";
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
@@ -19,7 +19,7 @@
         do {
             s += "{\"tentailieu\":\"" + rs.getString("tentailieu") + "\","
                     + "\"tenfile\":\"" + rs.getString("tenfile") + "\","
-                    + "\"tenloaitailieu\":\"" + rs.getString("tenloaitailieu") + "\"},";
+                    + "\"tenloaitailieu\":\"" + rs.getString("loaitl") + "\"},";
             
         } while(rs.next());
 //        s = s.subSequence(0, s.length() - 1);

@@ -6,7 +6,7 @@
 <%@include file="../Connect.jsp" %>
 <%
     String s ="";
-    String sql = "select ID,TENTAILIEU from LOAITAILIEU ";
+    String sql = "select LOAITAILIEU ,NGANH from LOAITAILIEU ";
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
         out.print("empty");
@@ -14,8 +14,8 @@
     } else {
          s = "[";
         do {
-            s += "{\"id\":\"" + rs.getInt(1) + "\","
-                    + "\"tentailieu\":\"" + rs.getString(2) + "\"},";
+            s += "{\"tentailieu\":\"" + rs.getString(1) + "\","
+                    + "\"nganh\":\"" + rs.getString(2) + "\"},";
             
         } while(rs.next());
 //        s = s.subSequence(0, s.length() - 1);

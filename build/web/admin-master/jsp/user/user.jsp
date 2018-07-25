@@ -6,7 +6,7 @@
 <%@include file="../Connect.jsp" %>
 <%
     String s ="";
-    String sql = "select ID,USERNAME,PASSWORD ,HOTEN from user ";
+    String sql = "select USERNAME,PASSWORD ,HOTEN from user ";
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
         out.print("empty");
@@ -14,10 +14,9 @@
     } else {
          s = "[";
         do {
-            s += "{\"id\":\"" + rs.getInt(1) + "\","
-                    + "\"username\":\"" + rs.getString(2) + "\","
-                    + "\"password\":\"" + rs.getString(3) + "\","
-                    + "\"hoten\":\"" + rs.getString(4) + "\"},";
+            s += "{\"username\":\"" + rs.getString(1) + "\","       
+                    + "\"password\":\"" + rs.getString(2) + "\","
+                    + "\"hoten\":\"" + rs.getString(3) + "\"},";
             
         } while(rs.next());
 //        s = s.subSequence(0, s.length() - 1);

@@ -64,13 +64,15 @@ public final class tailieucuatoi_jsp extends org.apache.jasper.runtime.HttpJspBa
 
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     Connection con = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/test","root","");
+            "jdbc:mysql://localhost:3306/qltlht?useUnicode=true&characterEncoding=UTF-8","root","");
     Statement stm = con.createStatement();
 
       out.write('\n');
 
     String s ="";
-    String sql = "select tentailieu ,tenfile, tenloaitailieu from tailieu ";
+//    String ngdang = request.getParameter("ngdang");
+    String ngdang = "kienloi";
+    String sql = "select tentailieu ,tenfile, loaitl from tailieu where tenuser = '" + ngdang +"'" ;
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
         out.print("empty");
@@ -80,7 +82,7 @@ public final class tailieucuatoi_jsp extends org.apache.jasper.runtime.HttpJspBa
         do {
             s += "{\"tentailieu\":\"" + rs.getString("tentailieu") + "\","
                     + "\"tenfile\":\"" + rs.getString("tenfile") + "\","
-                    + "\"tenloaitailieu\":\"" + rs.getString("tenloaitailieu") + "\"},";
+                    + "\"loaitl\":\"" + rs.getString("loaitl") + "\"},";
             
         } while(rs.next());
 //        s = s.subSequence(0, s.length() - 1);

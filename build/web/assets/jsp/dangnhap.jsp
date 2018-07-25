@@ -5,16 +5,22 @@
 <%
     String username = request.getParameter("username");
     String password = request.getParameter("password");
-    String kq = username + "," + password;
-    System.out.println(kq);
-    String sql = "SELECT * FROM user WHERE USERNAME='"+ username + "'AND PASSWORD='" + password +"'";
+    
+    String sql = "SELECT PASSWORD,HOTEN FROM user WHERE USERNAME ='"+username+"'";
     ResultSet rs = stm.executeQuery(sql);
-    if(rs.next()){
-        String hoten = rs.getString(3);
-        out.print(hoten);
-    }else{
+    if (!rs.next()) {
         out.print("false");
-    }
-    rs.close();
+    } else {
+            
+            String pw = rs.getString(1);
+            String name = rs.getString(2);
+            if (pw.equals(password))
+            {
+               out.print(name); 
+            }
+            else out.print("false");
+         }
+//        s = s.subSequence(0, s.length() - 1);
+        
 %>
 <%@include file="Disconnect.jsp" %>

@@ -30,11 +30,11 @@ and open the template in the editor.
                 kq = "";
                 for (var i = 0; i < bd.length; i++) {
                     
-                    kq +=   "<div class='col-sm-4'>"+bd[i].id + "</div>"
-                            + "<div class='col-sm-4'>" + bd[i].tentailieu + "</div>"
+                    kq +=   "<div class='col-sm-4'>"+bd[i].tentailieu + "</div>"
+                            + "<div class='col-sm-4'>" + bd[i].nganh + "</div>"
                             + "<div class='col-sm-4'>\n\
-                               <button class='btn btn-success' onclick='getLoaiTL("+bd[i].id+")'>Sửa</button>\n\
-                                <button class='btn btn-primary' onclick='delLoaiTL("+bd[i].id +")'>Xóa</button>\n\
+                               <button class='btn btn-success' onclick='getLoaiTL("+bd[i].tentailieu+")'>Sửa</button>\n\
+                                <button class='btn btn-primary' onclick='delLoaiTL('"+bd[i].tentailieu +"')'>Xóa</button>\n\
                                </div>"  ;            
                 }    
                 document.getElementById("loaitailieu").innerHTML = kq;
@@ -80,11 +80,14 @@ and open the template in the editor.
             
             function addLoaiTL(){
                 var addTenTL = document.getElementById("addTenTL").value;
+                var addKNTenTL = document.getElementById("addKNTenTL").value;
+                console.log(addTenTL);
+                console.log(addKNTenTL);
+                
                 var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open("GET","jsp/loaitailieu/addLoaiTL.jsp?addTenTL="+addTenTL,true);
-                xmlHttp.send();
+                xmlHttp.open("GET","jsp/loaitailieu/addLoaiTL.jsp?addTenTL= "+addTenTL + "&addKNTenTL= "+addKNTenTL,false);
                 alert("ĐÃ THÊM THÀNH CÔNG");
-                allLoaiTaiLieu()
+                allLoaiTaiLieu();
             }
             
         </script>
@@ -110,7 +113,9 @@ and open the template in the editor.
               <!-- Modal body -->
               <div class="modal-body">
                   <strong>Tên loại tài liệu</strong><br>
-                  <input type="text" id="addTenTL" value="" placeholder="Tên loại tài liệu...">
+                  <input type="text" id="addTenTL" value="" ><br>
+                  <strong>Khối ngành</strong><br>
+                  <input type="text" id="addKNTenTL" value="" >
               </div>
 
               <!-- Modal footer -->
@@ -125,8 +130,8 @@ and open the template in the editor.
         
         
         <div class="row ">
-            <div class="col-sm-4"><dt>ID</dt></div>
             <div class="col-sm-4"><dt>Tên tài liệu</dt></div>
+            <div class="col-sm-4"><dt>Khối ngành</dt></div>
             <div class="col-sm-4"><strong>Thao tác</strong></div>
                              
         </div>      
