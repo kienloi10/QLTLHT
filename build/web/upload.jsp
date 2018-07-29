@@ -30,10 +30,10 @@
             
 
             xmlHttp.open("GET","assets/jsp/UpLoad.jsp?filename= " + filename + "&tentl=" + tentl + "&loaitl="  + loaitl + "&ngdang=" + ngdang ,false);
-//            xmlHttp.send();
-//            var kq = xmlHttp.responseText.trim();
+            xmlHttp.send();
+            var kq = xmlHttp.responseText.trim();
 //            alert(kq);
-
+            console.log(kq);
         }
 
         </script>
@@ -43,15 +43,15 @@
 
                 
                 <div>
-                <p class="p_in_form">File Path:</p>
+                <p class="p_in_form">Đường dẫn:</p>
                 <input name="file" type="file" id="file" multiple required style="background-color: white;">
             </div>
             <div>
-                <p class="p_in_form">Document Name: </p>
+                <p class="p_in_form">Tên tài liệu: </p>
                 <input type="text" id="tentl" required> <br>
             </div>
             <div style="margin-bottom: 0px;">
-                <p class="p_in_form">Document Type: </p>
+                <p class="p_in_form">Loại tài liệu: </p>
                 <select id="datatypes" style="width: 75%; height: 22px; float: right; margin-top: 12px;" required >    
                 </select>
             </div>

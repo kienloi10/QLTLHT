@@ -66,7 +66,7 @@ public final class UpLoad_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write('\n');
 
-    String filename = request.getParameter("filename").trim();
+    String filename = request.getParameter("filename");
     String tentl= request.getParameter("tentl");
     String loaitl= request.getParameter("loaitl");
     String ngdang = request.getParameter("ngdang");
@@ -74,17 +74,27 @@ public final class UpLoad_jsp extends org.apache.jasper.runtime.HttpJspBase
 //    String filename = "css.txt";
 //    String tentl= "CSS";
 //    String loaitl= "Lap trinh web";
-    
-    String sql = "insert into tailieu(tentailieu,tenfile,loaitl,tenuser) VALUES ('" + tentl + "','"+ filename + "','" + loaitl + "','" + ngdang +"')";
-
-    try{
-        stm.executeUpdate(sql);
+    String sql = "SELECT username from user where hoten='"+ngdang+"'";
+    ResultSet rs = stm.executeQuery(sql);
+    String kq = "";
+    if (!rs.next()) {
+        out.print("empty");
+        return;
+    } else {
         
+        
+            kq = rs.getString(1);
     }
-    catch(Exception ex){
-        System.out.println(ex.toString());
-    }
- //   out.print(tentl);
+//    String sql1 = "insert into tailieu(tentailieu,tenfile,loaitl,tenuser) VALUES ('" + tentl + "','"+ filename + "','" + loaitl + "','" + rs +"')";
+//
+//    try{
+//        stm.executeUpdate(sql1);
+//        
+//    }
+//    catch(Exception ex){
+//        System.out.println(ex.toString());
+//    }
+    out.print(kq);
 
        
  
