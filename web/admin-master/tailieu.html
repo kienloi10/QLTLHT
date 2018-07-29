@@ -35,7 +35,7 @@ and open the template in the editor.
                             + "<div class='col-sm-2'>" + bd[i].loaitl + "</div>"
                             + "<div class='col-sm-2'>" + bd[i].tenuser + "</div>"
                             + "<div class='col-sm-2'>\n\
-                               <button class='btn btn-success' onclick='getTaiLieu(\""+bd[i].id+"\")'>Sửa</button>\n\
+                               <button class='btn btn-success' onclick='getTaiLieu("+bd[i].id+")'>Sửa</button>\n\
                                 <button class='btn btn-primary' onclick='delTaiLieu("+bd[i].id+")'>Xóa</button>\n\
                                </div></div>";            
                 }
@@ -50,10 +50,42 @@ and open the template in the editor.
                     xmlHttp.open("GET","jsp/tailieu/delTaiLieu.jsp?id="+id,false);       
                     xmlHttp.send();        
                     allTaiLieu();
-                }
-                
+                }                
             }
             
+            function getTaiLieu(idFind){
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET","jsp/tailieu/1tailieu.jsp?idFind="+idFind,false);       
+                    xmlHttp.send();
+                    var nhan = xmlHttp.responseText.trim();               
+                    var bd = JSON.parse(nhan);
+                    var kq="";
+                    kq +=   "<div class='col-sm-2'><input type='text' id='tentl' value='" +bd.tentailieu + "'></div>"
+                            + "<div class='col-sm-2'><input type='text' id='tenfile' value='" + bd.tenfile + "'></div>"
+                            + "<div class='col-sm-2'>" + bd.loaitl + "</div>"
+                            + "<div class='col-sm-2'>" + bd.tenuser + "</div>"
+                            + "<div class='col-sm-2'>\n\
+                               <button class='btn btn-success' onclick='editTL("+bd.id+")'>Xác nhận</button>\n\
+                                <button class='btn btn-primary' onclick='allTaiLieu()'>Hủy</button>\n\
+                               </div>"  ;
+                     document.getElementById("tailieu").innerHTML = kq;       
+             }   
+             
+             function editTL(id){
+
+                var tentl = document.getElementById("tentl").value;
+                var tenfile = document.getElementById("tenfile").value;
+                
+                
+                var xmlHttp = new XMLHttpRequest();
+
+                xmlHttp.open("GET","jsp/tailieu/updateTaiLieu.jsp?id=" + id + "&tentl=" + tentl + "&tenfile="  + tenfile ,false);
+                xmlHttp.send();
+                alert("ĐÃ SỬA THÀNH CÔNG");
+                allTaiLieu()
+                
+                
+            }
             
             
         </script>
