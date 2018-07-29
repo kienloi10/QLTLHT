@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+           function allTaiLieu() {
+                var bd = "";
+                var kq = "";
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("get", "jsp/tailieu/tailieu.jsp", false);
+                xmlhttp.send();
+
+                var nhan = xmlhttp.responseText.trim();
+                
+                if (nhan === "empty")
+                {
+                    alert("rong");
+                }
+                bd = JSON.parse(nhan);
+                kq = "";
+                for (var i = 0; i < bd.length; i++) {
+                    
+                    kq +=   "<div class='row'><div class='col-sm-2'>"+bd[i].tentailieu + "</div>"
+                            + "<div class='col-sm-2'>" + bd[i].tenfile + "</div>"
+                            + "<div class='col-sm-2'>" + bd[i].loaitl + "</div>"
+                            + "<div class='col-sm-2'>" + bd[i].tenuser + "</div>"
+                            + "<div class='col-sm-2'>\n\
+                               <button class='btn btn-success' onclick='getTaiLieu(\""+bd[i].id+"\")'>Sửa</button>\n\
+                                <button class='btn btn-primary' onclick='delTaiLieu("+bd[i].id+")'>Xóa</button>\n\
+                               </div></div>";            
+                }
+           
+                document.getElementById("tailieu").innerHTML = kq;
+            }
+            
+            function delTaiLieu(id){
+                if (confirm("Are you sure?"))
+                {
+                    var xmlHttp = new XMLHttpRequest();                    
+                    xmlHttp.open("GET","jsp/tailieu/delTaiLieu.jsp?id="+id,false);       
+                    xmlHttp.send();        
+                    allTaiLieu();
+                }
+                
+            }
+            
+            
+            
+        </script>
+    </head>
+    <body>
+         <div class="row ">
+            <div class="col-sm-2"><dt>Tên tài liệu</dt></div>
+            <div class="col-sm-2"><dt>File</dt></div>
+            <div class="col-sm-2"><dt>Loại </dt></div>
+            <div class="col-sm-2"><dt>Người up </dt></div>
+            <div class="col-sm-2"><strong>Thao tác</strong></div>                      
+        </div>   
+       
+        
+        
+        
+         <div id="tailieu"></div>
+            <script>
+                allTaiLieu();
+            </script>
+    </body>
+</html>
