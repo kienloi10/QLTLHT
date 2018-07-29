@@ -38,24 +38,24 @@ and open the template in the editor.
                             + "<a class='type'>"+ bd[i].loaitl + "</a>"
 //                            + "<p>Download:</p>"
                             + "<a class='filename' href='assets/jsp/download.jsp?filename=" + bd[i].tenfile + "'>Download</a>"
-                            + "<button class='btndel' onclick='Deletetl(\""+ bd[i].tenfile +"\")'>Delete</button>"
+                            + "<button class='btndel' onclick='Deletetl("+ bd[i].id +")'>Delete</button>"
                                +"</li>";
 
                 }
                 kq += "</ul>";
                 document.getElementById("thongdiep").innerHTML = kq;
-    console.log(nhan);
+                console.log(nhan);
             }
             
-            function Deletetl(filename){
-               alert(filename);
-//                var yes = confirm("Xác nhận xóa tài liệu!");
-//                if(yes){
-//                    xhttp = new XMLHttpRequest();
-//                    xhttp.open("GET","assets/jsp/xoafile.jsp?filename="+ filename.toString(),false);
-//                    xhttp.send();
-//                    tailieu();
-//                }
+            function Deletetl(id){
+               alert(id);
+                var yes = confirm("Xác nhận xóa tài liệu!");
+                if(yes){
+                    xhttp = new XMLHttpRequest();
+                    xhttp.open("GET","assets/jsp/xoafile.jsp?id="+ id,false);
+                    xhttp.send();
+                    tailieu();
+                }
             }
         </script>
 

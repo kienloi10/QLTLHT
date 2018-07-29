@@ -8,7 +8,7 @@
     String s ="";
     String ngdang = request.getParameter("ngdang");
 //    String ngdang = "truongloc";
-    String sql = " select TENTAILIEU,TENFILE,LOAITL from tailieu,user where tailieu.TENUSER=user.USERNAME and user.HOTEN ='" + ngdang +"'" ;
+    String sql = " select ID,TENTAILIEU,TENFILE,LOAITL from tailieu,user where tailieu.TENUSER=user.USERNAME and user.HOTEN ='" + ngdang +"'" ;
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
         out.print("empty");
@@ -16,7 +16,8 @@
     } else {
          s = "[";
         do {
-            s += "{\"tentailieu\":\"" + rs.getString("tentailieu") + "\","
+            s += "{\"id\":\"" + rs.getString("id") + "\","
+                    + "\"tentailieu\":\"" + rs.getString("tentailieu") + "\","
                     + "\"tenfile\":\"" + rs.getString("tenfile") + "\","
                     + "\"loaitl\":\"" + rs.getString("loaitl") + "\"},";
             

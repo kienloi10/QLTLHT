@@ -4,12 +4,24 @@
 <%@page import="java.sql.SQLException"%>
 <%@include file="Connect.jsp" %>
 <%
-    String filename = request.getParameter("filename");
-    String filePath = "D://Nam 4/LT web/QLTLHT/web/assets/uploadfile/" + filename;
-    String sql = "DELETE FROM tailieu WHERE tenfile='"+ filename +"'";
+    String id = request.getParameter("id");
+
+    String sql = "SELECT tenfile from tailieu where id="+id;
+    ResultSet rs = stm.executeQuery(sql);
+    String filename ="";
+    if (!rs.next()) {
+        out.print("empty");
+        return;
+    } else {   
+            filename = rs.getString(1);
+    } 
+    
+    
+    String filePath = "D://Nam 4/QLTLHT/web/assets/uploadfile/" + filename;
+    String sql1 = "DELETE FROM tailieu WHERE id="+ id ;
    
     try{
-        stm.executeUpdate(sql);
+        stm.executeUpdate(sql1);
         File file = new File(filePath);
         file.delete();
     }catch(Exception e){

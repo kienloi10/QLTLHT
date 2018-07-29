@@ -63,25 +63,37 @@ public final class xoafile_jsp extends org.apache.jasper.runtime.HttpJspBase
 
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     Connection con = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/test","root","");
+            "jdbc:mysql://localhost:3306/qltlht?useUnicode=true&characterEncoding=UTF-8","root","");
     Statement stm = con.createStatement();
 
       out.write('\n');
 
-    //String filename = request.getParameter("filename");
-     String filename = "javaio.docx";
-    String filePath = "D://Nam 4/LT web/QLTLHT/web/assets/uploadfile/" + filename;
-    //String sql = "DELETE FROM tailieu WHERE tenfile='"+ filename +"'";
-    int count = -1;
- 
+    String a = request.getParameter("id").trim();
+    String id = a.trim(); 
+    String sql = "SELECT tenfile from tailieu where id="+id;
+    ResultSet rs = stm.executeQuery(sql);
+    String filename ="";
+    if (!rs.next()) {
+        out.print("empty");
+        return;
+    } else {   
+            filename = rs.getString(1);
+    } 
+    
+    
+    String filePath = "D://Nam 4/QLTLHT/web/assets/uploadfile/" + filename;
+    String sql1 = "DELETE FROM tailieu WHERE id="+ id ;
+   
     try{
-       //count = stm.executeUpdate(sql);
+        stm.executeUpdate(sql);
         File file = new File(filePath);
         file.delete();
     }catch(Exception e){
+        out.print("Lỗi");
         System.out.println(e.toString());
         return;
     }
+    out.print("Xóa file thành công");
 
       out.write('\n');
 

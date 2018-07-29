@@ -23,7 +23,7 @@
 
 %>   
 <%
-  String filename = request.getParameter("filename");
+  String filename = request.getParameter("filename").trim();
 //  String filename = "html.txt";   
   String filepath = "d:\\Nam 4\\QLTLHT\\web\\assets\\uploadfile\\";   
   response.setContentType("APPLICATION/OCTET-STREAM");   
