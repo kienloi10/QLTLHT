@@ -74,8 +74,11 @@ public final class addLoaiTL_jsp extends org.apache.jasper.runtime.HttpJspBase
     String addTenTL= request.getParameter("addTenTL");
     String addKNTenTL= request.getParameter("addKNTenTL");
     
-    String sql = "INSERT INTO loaitailieu(loaitailieu,nganh) VALUES ('Lap trinh c++','CNTT')";
-    stm.executeUpdate(sql);
+    
+    String sql = "INSERT INTO loaitailieu(loaitailieu,nganh) VALUES ('"+addTenTL+"','"+addKNTenTL+"')";
+//    String sql = "INSERT INTO loaitailieu(loaitailieu,nganh) VALUES ('A0','132')";
+//    stm.executeUpdate(sql);
+    out.print(addTenTL);
          
 
       out.write('\n');

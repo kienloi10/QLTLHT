@@ -18,6 +18,7 @@ and open the template in the editor.
                 var kq = "";
                 var xmlhttp = new XMLHttpRequest();
                 var ngdang = sessionStorage.getItem("hoten");
+
                 xmlhttp.open("get", "assets/jsp/tailieucuatoi.jsp?ngdang=" + ngdang, false);
                 xmlhttp.send();
 
@@ -43,6 +44,7 @@ and open the template in the editor.
                 }
                 kq += "</ul>";
                 document.getElementById("thongdiep").innerHTML = kq;
+    console.log(nhan);
             }
             
             function Deletetl(filename){

@@ -51,10 +51,11 @@ and open the template in the editor.
             function delUser(id){
                 if (confirm("Are you sure?"))
                 {
+                    //alert(id);
                     var xmlHttp = new XMLHttpRequest();
                     
                     xmlHttp.open("GET","jsp/user/delUser.jsp?id="+id,false);       
-                    xmlHttp.send();
+                    xmlHttp.send();        
                     allUser();
                 }
                 

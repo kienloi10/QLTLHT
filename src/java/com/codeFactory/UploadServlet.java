@@ -20,7 +20,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  */
 @WebServlet("/UploadServlet")
 public class UploadServlet extends HttpServlet {
-	private final String UPLOAD_DIRECTORY = "D:/Nam 4/LT web/QLTLHT/web/assets/uploadfile/";
+	private final String UPLOAD_DIRECTORY = "D:/Nam 4/QLTLHT/web/assets/uploadfile/";
 	private static final long serialVersionUID = 1L;
        
     /**

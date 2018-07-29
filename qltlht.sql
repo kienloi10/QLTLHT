@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 23, 2018 lúc 05:49 PM
+-- Thời gian đã tạo: Th7 29, 2018 lúc 07:56 AM
 -- Phiên bản máy phục vụ: 10.1.26-MariaDB
 -- Phiên bản PHP: 7.1.8
 
@@ -29,19 +29,18 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `loaitailieu` (
-  `ID` int(11) NOT NULL,
-  `TENTAILIEU` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `LOAITAILIEU` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `NGANH` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `loaitailieu`
 --
 
-INSERT INTO `loaitailieu` (`ID`, `TENTAILIEU`) VALUES
-(1, 'Toán học'),
-(2, ' Lập trình Website'),
-(3, 'Lập trình Java'),
-(5, 'Kinh tế');
+INSERT INTO `loaitailieu` (`LOAITAILIEU`, `NGANH`) VALUES
+('Kinh tế', 'Quản trị kinh doanh'),
+('Lập trình Web', 'Công nghệ thông tin'),
+('Toán học', 'Cơ bản');
 
 -- --------------------------------------------------------
 
@@ -53,19 +52,18 @@ CREATE TABLE `tailieu` (
   `ID` int(11) NOT NULL,
   `TENTAILIEU` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `TENFILE` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `ID_LTL` int(11) NOT NULL,
-  `ID_USER` int(11) NOT NULL
+  `LOAITL` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `TENUSER` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tailieu`
 --
 
-INSERT INTO `tailieu` (`ID`, `TENTAILIEU`, `TENFILE`, `ID_LTL`, `ID_USER`) VALUES
-(1, 'Đại số', 'daiso.txt', 1, 1),
-(2, 'Gỉai tích', 'giaitich.docx', 1, 3),
-(3, 'HTML', 'html.txt', 2, 2),
-(4, 'CSS', 'css.txt', 2, 1);
+INSERT INTO `tailieu` (`ID`, `TENTAILIEU`, `TENFILE`, `LOAITL`, `TENUSER`) VALUES
+(2, 'Đại số', 'daiso.txt', 'Toán học', 'kienloi'),
+(3, 'CSS', 'css.txt', 'Lập trình Web', 'truongloc'),
+(8, 'Tin học quản lý', 'b.txt', 'Kinh tế', 'truongloc');
 
 -- --------------------------------------------------------
 
@@ -74,7 +72,6 @@ INSERT INTO `tailieu` (`ID`, `TENTAILIEU`, `TENFILE`, `ID_LTL`, `ID_USER`) VALUE
 --
 
 CREATE TABLE `user` (
-  `ID` int(11) NOT NULL,
   `USERNAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `PASSWORD` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `HOTEN` varchar(255) COLLATE utf8_unicode_ci NOT NULL
@@ -84,11 +81,11 @@ CREATE TABLE `user` (
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`ID`, `USERNAME`, `PASSWORD`, `HOTEN`) VALUES
-(1, ' kienloi', 'kienloi', 'Đổng Kiến Lợi'),
-(2, '  truongloc', 'truongloc', 'Nguyễn Trương Lộc'),
-(3, 'kienthuan', 'kienthuan', 'Kiến Thuận'),
-(4, 'nguyenvana', ' 123', 'Nguyễn Văn A');
+INSERT INTO `user` (`USERNAME`, `PASSWORD`, `HOTEN`) VALUES
+('kienloi', 'kienloi', 'Đổng Kiến Lợi'),
+('kienthuan', '1234', 'Đổng Kiến Thuận'),
+('truongloc', 'truonglocnguyen', 'Lộc'),
+('vinhhung', 'vinhhung', 'Lưu Vĩnh Hùng');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -98,41 +95,31 @@ INSERT INTO `user` (`ID`, `USERNAME`, `PASSWORD`, `HOTEN`) VALUES
 -- Chỉ mục cho bảng `loaitailieu`
 --
 ALTER TABLE `loaitailieu`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`LOAITAILIEU`);
 
 --
 -- Chỉ mục cho bảng `tailieu`
 --
 ALTER TABLE `tailieu`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `ID_LTL` (`ID_LTL`),
-  ADD KEY `ID_USER` (`ID_USER`);
+  ADD KEY `TENUSER` (`TENUSER`),
+  ADD KEY `LOAITL` (`LOAITL`);
 
 --
 -- Chỉ mục cho bảng `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`USERNAME`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT cho bảng `loaitailieu`
---
-ALTER TABLE `loaitailieu`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
 -- AUTO_INCREMENT cho bảng `tailieu`
 --
 ALTER TABLE `tailieu`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT cho bảng `user`
---
-ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
@@ -141,8 +128,8 @@ ALTER TABLE `user`
 -- Các ràng buộc cho bảng `tailieu`
 --
 ALTER TABLE `tailieu`
-  ADD CONSTRAINT `tailieu_ibfk_1` FOREIGN KEY (`ID_LTL`) REFERENCES `loaitailieu` (`ID`),
-  ADD CONSTRAINT `tailieu_ibfk_2` FOREIGN KEY (`ID_USER`) REFERENCES `user` (`ID`);
+  ADD CONSTRAINT `tailieu_ibfk_1` FOREIGN KEY (`TENUSER`) REFERENCES `user` (`USERNAME`),
+  ADD CONSTRAINT `tailieu_ibfk_2` FOREIGN KEY (`LOAITL`) REFERENCES `loaitailieu` (`LOAITAILIEU`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

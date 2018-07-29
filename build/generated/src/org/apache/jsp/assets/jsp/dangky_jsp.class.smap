@@ -1,19 +1,19 @@
 SMAP
-UpLoad_jsp.java
+dangky_jsp.java
 JSP
 *S JSP
 *F
-+ 0 UpLoad.jsp
-assets/jsp/UpLoad.jsp
++ 0 dangky.jsp
+assets/jsp/dangky.jsp
 + 1 Connect.jsp
 assets/jsp/Connect.jsp
 + 2 Disconnect.jsp
 assets/jsp/Disconnect.jsp
 *L
-1,4:55
-1#1,9:58
-4#0:67
-6,24:69
-29,2:93
-2#2,3:96
+1,5:56
+1#1,9:60
+5#0:69
+7,15:71
+21:86
+2#2,3:88
 *E

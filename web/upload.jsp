@@ -14,17 +14,25 @@
 
             var file = document.getElementById("file").value;
             var arr = file.toString().split("\\");
-            var filename = arr[arr.length-1];
+            var filename1 = arr[arr.length-1];
+            var filename = filename1.trim();
+            
 
             var tentl = document.getElementById("tentl").value;
             var loaitl = document.getElementById("datatypes").value;
             var ngdang = sessionStorage.getItem("hoten");
             var xmlHttp = new XMLHttpRequest();
+            console.log(filename);
+            console.log(tentl);
+            console.log(loaitl);
+            console.log(ngdang);
+            
+            
 
             xmlHttp.open("GET","assets/jsp/UpLoad.jsp?filename= " + filename + "&tentl=" + tentl + "&loaitl="  + loaitl + "&ngdang=" + ngdang ,false);
-            xmlHttp.send();
-    //        var kq = xmlHttp.responseText;
-    //        alert(kq);
+//            xmlHttp.send();
+//            var kq = xmlHttp.responseText.trim();
+//            alert(kq);
 
         }
 

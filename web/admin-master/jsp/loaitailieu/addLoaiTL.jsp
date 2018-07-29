@@ -12,7 +12,9 @@
     
     
     String sql = "INSERT INTO loaitailieu(loaitailieu,nganh) VALUES ('"+addTenTL+"','"+addKNTenTL+"')";
-    stm.executeUpdate(sql);
+//    String sql = "INSERT INTO loaitailieu(loaitailieu,nganh) VALUES ('A0','132')";
+//    stm.executeUpdate(sql);
+    out.print(addTenTL);
          
 %>
 

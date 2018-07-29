@@ -1,0 +1,101 @@
+[HttpPost]
+		public IHttpActionResult TaoLop(CreateClassModel model)
+		{
+			IHttpActionResult httpActionResult;
+			ErrorModel errors = new ErrorModel();
+
+			if (string.IsNullOrEmpty(model.MaLop))
+			{
+				errors.Add("Mã l?p là tru?ng b?t bu?c");
+			}
+
+			if (string.IsNullOrEmpty(model.TenLop))
+			{
+				errors.Add("Tên l?p là tru?ng b?t bu?c");
+			}
+
+			if (errors.Errors.Count == 0)
+			{
+				Course lop = new Course();
+				lop.Ma = model.MaLop;
+				lop.Ten = model.TenLop;
+
+				//lop = _db.Courses.Add(lop);
+
+				this._db.SaveChanges();
+
+				ClassModel viewModel = new ClassModel(lop);
+
+				httpActionResult = Ok(viewModel);
+			}
+			else
+			{
+				httpActionResult = Ok(errors);
+			}
+
+			return httpActionResult;
+		}
+
+		[HttpPut]
+		public IHttpActionResult CapNhatLop(UpdateClassModel model)
+		{
+			IHttpActionResult httpActionResult;
+			ErrorModel errors = new ErrorModel();
+
+			Course lop = this._db.Courses.FirstOrDefault(x => x.Id == model.Id);
+
+			if (lop == null)
+			{
+				errors.Add("Không tìm th?y l?p");
+
+				httpActionResult = Ok(errors);
+			}
+			else
+			{
+				lop.Ma = model.MaLop ?? model.MaLop;
+				lop.Ten = model.TenLop ?? model.TenLop;
+
+				this._db.Entry(lop).State = System.Data.Entity.EntityState.Modified;
+
+				this._db.SaveChanges();
+
+				httpActionResult = Ok(new ClassModel(lop));
+			}
+
+			return httpActionResult;
+		}
+[HttpGet]
+		public IHttpActionResult GetById(int id)
+		{
+			IHttpActionResult httpActionResult; 
+			var lop = _db.Courses.FirstOrDefault(x => x.Id == id);
+
+			if (lop == null)
+			{
+				ErrorModel errors = new ErrorModel();
+				errors.Add("Không tìm th?y l?p");
+
+				httpActionResult = Ok(errors);
+			}
+			else
+			{
+				httpActionResult = Ok(new ClassModel(lop));
+			}
+
+			return httpActionResult;
+		} 
+
+
+
+ [HttpGet]
+        public IHttpActionResult GetAllSV()
+        {
+            var listsvs = this._db.Students.Select(x => new StudentModel()
+            {
+                MaSV = x.MSSV,
+                HoTenSV = x.HoTen,
+                DiaChi = x.DiaChi
+
+            });
+            return Ok(listsvs);
+        }

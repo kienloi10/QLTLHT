@@ -1,16 +1,15 @@
-package org.apache.jsp.admin_002dmaster.jsp.user;
+package org.apache.jsp.assets.jsp;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.Connection;
 
-public final class _1user_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class upLoadToSQL_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -19,8 +18,8 @@ public final class _1user_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   static {
     _jspx_dependants = new java.util.ArrayList<String>(2);
-    _jspx_dependants.add("/admin-master/jsp/user/../Connect.jsp");
-    _jspx_dependants.add("/admin-master/jsp/user/../Disconnect.jsp");
+    _jspx_dependants.add("/assets/jsp/Connect.jsp");
+    _jspx_dependants.add("/assets/jsp/Disconnect.jsp");
   }
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
@@ -42,7 +41,7 @@ public final class _1user_jsp extends org.apache.jasper.runtime.HttpJspBase
     PageContext _jspx_page_context = null;
 
     try {
-      response.setContentType("text/html;charset=UTF-8");
+      response.setContentType("text/html");
       pageContext = _jspxFactory.getPageContext(this, request, response,
       			null, true, 8192, true);
       _jspx_page_context = pageContext;
@@ -59,8 +58,6 @@ public final class _1user_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
-      out.write("\n");
-      out.write("\n");
 
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     Connection con = DriverManager.getConnection(
@@ -69,29 +66,27 @@ public final class _1user_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write('\n');
 
-    String idFind= request.getParameter("idFind");
-    String s ="";
-    String sql = "select USERNAME,PASSWORD ,HOTEN from user WHERE USERNAME="+idFind;
-    ResultSet rs = stm.executeQuery(sql);
-    if (!rs.next()) {
-        out.print("empty");
-        return;
-    } else {
-         s = "{";
-        do {
-            s += "\"username\":\"" + rs.getString(1) + "\","         
-                    + "\"password\":\"" + rs.getString(2) + "\","
-                    + "\"hoten\":\"" + rs.getString(3) + "\",";
-            
-        } while(rs.next());
-//        s = s.subSequence(0, s.length() - 1);
-        s = s.substring(0, s.length() - 1);
-        s += "}";
-//        s.trim();
-        rs.close();
-        out.print(s);
-    }
+    String filename = request.getParameter("filename");
+    String tentl= request.getParameter("tentl");
+    String loaitl= request.getParameter("loaitl");
+    String ngdang = request.getParameter("ngdang");
 
+//    String filename = "css.txt";
+//    String tentl= "CSS";
+//    String loaitl= "Lap trinh web";
+    
+    String sql = "insert into tailieu(tentailieu,tenfile,loaitl,tenuser) VALUES ('" + tentl + "','"+ filename + "','" + loaitl + "','" + ngdang +"')";
+//   String sql = "insert into tailieu(tentailieu,tenfile,loaitl,tenuser) VALUES ('Tin hoc quan ly','thql.txt','Kinh t?','kienloi')";
+//    String sql = "INSERT INTO tailieu(tentailieu,tenfile,tenloaitailieu,tenngdang) VALUES ('CSS','css.txt','Lap trinh web','An')";
+  
+        stm.executeUpdate(sql);
+    
+
+    
+ 
+    //rs.close();
+
+      out.write('\n');
       out.write('\n');
 
     stm.close();

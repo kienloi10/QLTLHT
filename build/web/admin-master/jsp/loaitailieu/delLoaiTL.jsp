@@ -7,8 +7,9 @@
 <%
     String id= request.getParameter("id");
   
-    String sql = "DELETE FROM loaitailieu WHERE id= "+id;
+    String sql = "DELETE FROM loaitailieu WHERE loaitailieu='"+id+"'";
     stm.executeUpdate(sql);
+//   out.print(id);
          
 %>
 

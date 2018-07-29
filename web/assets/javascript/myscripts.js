@@ -114,7 +114,7 @@ function dangKy(){
     var username = document.getElementById("username").value.trim();
     var password = document.getElementById("password").value.trim();
     var password_confirm = document.getElementById("conf_password").value.trim();
-    var email = document.getElementById("email").value.trim();
+   // var email = document.getElementById("email").value.trim();
     var hoten  = document.getElementById("hoten").value.trim();
     if(username !=""){
         if(password != "" && (password == password_confirm)){
@@ -124,7 +124,7 @@ function dangKy(){
 //               xmlHttp.open("GET","assets/jsp/dangky.jsp?userInfo=" + userInfo,true);
                 var userInfo = "username="+username 
                            +"&password=" + password 
-                           +"&email=" + email 
+                           //+"&email=" + email 
                            +"&hoten=" + hoten;
                 xmlHttp.open("GET","assets/jsp/dangky.jsp?"+userInfo ,false);
 //                xmlHttp.setRequestHeader("User_Signup","/userInfo");

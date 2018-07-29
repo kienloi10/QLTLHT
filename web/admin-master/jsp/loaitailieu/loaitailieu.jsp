@@ -14,7 +14,7 @@
     } else {
          s = "[";
         do {
-            s += "{\"tentailieu\":\"" + rs.getString(1) + "\","
+            s += "{\"loaitailieu\":\"" + rs.getString(1) + "\","
                     + "\"nganh\":\"" + rs.getString(2) + "\"},";
             
         } while(rs.next());

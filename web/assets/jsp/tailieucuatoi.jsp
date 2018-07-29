@@ -6,9 +6,9 @@
 <%@include file="Connect.jsp" %>
 <%
     String s ="";
-//    String ngdang = request.getParameter("ngdang");
-    String ngdang = "kienloi";
-    String sql = "select tentailieu ,tenfile, loaitl from tailieu where tenuser = '" + ngdang +"'" ;
+    String ngdang = request.getParameter("ngdang");
+//    String ngdang = "truongloc";
+    String sql = " select TENTAILIEU,TENFILE,LOAITL from tailieu,user where tailieu.TENUSER=user.USERNAME and user.HOTEN ='" + ngdang +"'" ;
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
         out.print("empty");

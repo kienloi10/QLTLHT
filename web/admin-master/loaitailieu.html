@@ -30,39 +30,41 @@ and open the template in the editor.
                 kq = "";
                 for (var i = 0; i < bd.length; i++) {
                     
-                    kq +=   "<div class='col-sm-4'>"+bd[i].tentailieu + "</div>"
+                    kq +=   "<div class='col-sm-4'>"+bd[i].loaitailieu + "</div>"
                             + "<div class='col-sm-4'>" + bd[i].nganh + "</div>"
                             + "<div class='col-sm-4'>\n\
-                               <button class='btn btn-success' onclick='getLoaiTL("+bd[i].tentailieu+")'>Sửa</button>\n\
-                                <button class='btn btn-primary' onclick='delLoaiTL('"+bd[i].tentailieu +"')'>Xóa</button>\n\
+                               <button class='btn btn-success' onclick='getLoaiTL(\""+bd[i].loaitailieu+"\")'>Sửa</button>\n\
+                                <button class='btn btn-primary' onclick='delLoaiTL(\""+bd[i].loaitailieu +"\")'>Xóa</button>\n\
                                </div>"  ;            
                 }    
                 document.getElementById("loaitailieu").innerHTML = kq;
             }
             
             function delLoaiTL(id){
+                
                 if (confirm("Are you sure?"))
                 {
-                    var bd = "";
-                    var kq = "";
                     var xmlHttp = new XMLHttpRequest();
                     xmlHttp.open("GET","jsp/loaitailieu/delLoaiTL.jsp?id="+id,false);       
                     xmlHttp.send();
+          
                     allLoaiTaiLieu();
                 }
             }
             
             function getLoaiTL(idFind){
-                 var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.open("GET","jsp/loaitailieu/1LoaiTL.jsp?idFind="+idFind,false);       
+                    console.log(idFind);
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET","jsp/loaitailieu/1LoaiTL.jsp?loaitailieu="+idFind,false);       
                     xmlHttp.send();
-                    var nhan = xmlHttp.responseText.trim();               
+                    var nhan = xmlHttp.responseText.trim();
+                    //alert(nhan);
                     var bd = JSON.parse(nhan);
                     var kq="";
-                    kq +=   "<div class='col-sm-4'>"+bd.id + "</div>"
-                            + "<div class='col-sm-4'><input type='text' id='editNameUser' value='" + bd.tentailieu + "'></div>"    
+                    kq +=   "<div class='col-sm-4'>"+bd.loaitailieu + "</div>"
+                            + "<div class='col-sm-4'><input type='text' id='editNameUser' value='" + bd.nganh + "'></div>"    
                             + "<div class='col-sm-4'>\n\
-                               <button class='btn btn-success' onclick='editLoaiTL("+bd.id+")'>Xác nhận</button>\n\
+                               <button class='btn btn-success' onclick='editLoaiTL("+bd.loaitailieu+")'>Xác nhận</button>\n\
                                 <button class='btn btn-primary'>Hủy</button>\n\
                                </div>"  ;
                      document.getElementById("loaitailieu").innerHTML = kq;    
@@ -85,8 +87,10 @@ and open the template in the editor.
                 console.log(addKNTenTL);
                 
                 var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open("GET","jsp/loaitailieu/addLoaiTL.jsp?addTenTL= "+addTenTL + "&addKNTenTL= "+addKNTenTL,false);
+                xmlHttp.open("GET","jsp/loaitailieu/addLoaiTL.jsp?addTenTL="+addTenTL+"&addKNTenTL="+addKNTenTL,true);
                 alert("ĐÃ THÊM THÀNH CÔNG");
+                var nhan = xmlHttp.responseText;  
+                alert(nhan);
                 allLoaiTaiLieu();
             }
             

@@ -52,13 +52,6 @@ public final class UpLoad_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write(" \n");
-      out.write("    Document   : upload\n");
-      out.write("    Created on : Oct 18, 2017, 7:19:31 PM\n");
-      out.write("    Author     : HP\n");
-      out.write("\n");
-      out.write('\n');
-      out.write('\n');
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -68,31 +61,34 @@ public final class UpLoad_jsp extends org.apache.jasper.runtime.HttpJspBase
 
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     Connection con = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/test","root","");
+            "jdbc:mysql://localhost:3306/qltlht?useUnicode=true&characterEncoding=UTF-8","root","");
     Statement stm = con.createStatement();
 
       out.write('\n');
 
-//    String filename = request.getParameter("filename").trim();
-//    String tentl= request.getParameter("tentl");
-//    String loaitl= request.getParameter("loaitl");
+    String filename = request.getParameter("filename").trim();
+    String tentl= request.getParameter("tentl");
+    String loaitl= request.getParameter("loaitl");
+    String ngdang = request.getParameter("ngdang");
 
-    String filename = "css.txt";
-    String tentl= "CSS";
-    String loaitl= "Lap trinh web";
+//    String filename = "css.txt";
+//    String tentl= "CSS";
+//    String loaitl= "Lap trinh web";
     
-//    String sql = "insert into tailieu(tentailieu,tenfile,tenloaitailieu) VALUES ('" + tentl + "','"+ filename + "','" + loaitl +"')";
-    String sql = "INSERT INTO tailieu(tentailieu,tenfile,tenloaitailieu,tenngdang) VALUES ('CSS','css.txt','Lap trinh web','An')";
+    String sql = "insert into tailieu(tentailieu,tenfile,loaitl,tenuser) VALUES ('" + tentl + "','"+ filename + "','" + loaitl + "','" + ngdang +"')";
+
     try{
         stm.executeUpdate(sql);
+        
     }
     catch(Exception ex){
         System.out.println(ex.toString());
     }
-    
-    
+ //   out.print(tentl);
+
+       
  
-    //rs.close();
+    
 
       out.write('\n');
       out.write('\n');

@@ -70,8 +70,8 @@ public final class tailieucuatoi_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write('\n');
 
     String s ="";
-//    String ngdang = request.getParameter("ngdang");
-    String ngdang = "kienloi";
+    String ngdang = request.getParameter("ngdang");
+ //   String ngdang = "kienloi";
     String sql = "select tentailieu ,tenfile, loaitl from tailieu where tenuser = '" + ngdang +"'" ;
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
