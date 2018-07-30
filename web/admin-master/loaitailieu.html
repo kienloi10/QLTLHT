@@ -33,7 +33,7 @@ and open the template in the editor.
                     kq +=   "<div class='col-sm-4'>"+bd[i].loaitl + "</div>"
                             + "<div class='col-sm-4'>" + bd[i].nganh + "</div>"
                             + "<div class='col-sm-4'>\n\
-                               <button class='btn btn-success' onclick='getUser(\""+bd[i].loaitl+"\")'>Sửa</button>\n\
+                               <button class='btn btn-success' onclick='getLoaiTL(\""+bd[i].loaitl+"\")'>Sửa</button>\n\
                                 <button class='btn btn-primary' onclick='delLoaiTL(\""+bd[i].loaitl+"\")'>Xóa</button>\n\
                                </div>";            
                 }           
@@ -51,7 +51,48 @@ and open the template in the editor.
                 allLoaiTL()
             }
             
+            function delLoaiTL(loaitailieu){
+                if (confirm("Are you sure?"))
+                {
+                    //alert(id);
+                    var xmlHttp = new XMLHttpRequest();
+                    
+                    xmlHttp.open("GET","jsp/loaitl/delLoaiTL.jsp?loaitailieu="+loaitailieu,false);       
+                    xmlHttp.send();        
+                    allLoaiTL();
+                }
+                
+            }
             
+            function getLoaiTL(loaitailieu){
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET","jsp/loaitl/1LoaiTL.jsp?loaitailieu="+loaitailieu,false);       
+                    xmlHttp.send();
+                    var nhan = xmlHttp.responseText.trim();               
+                    var bd = JSON.parse(nhan);
+                    var kq="";
+                    kq +=   "<div class='col-sm-4'>"+bd.loaitailieu + "</div>"
+                            + "<div class='col-sm-4'><input type='text' id='editNganh' value='" + bd.nganh + "'></div>"                        
+                            + "<div class='col-sm-4'>\n\
+                               <button class='btn btn-success' onclick='editLoaiTL(\""+bd.loaitailieu+"\")'>Xác nhận</button>\n\
+                                <button class='btn btn-primary' onclick='allLoaiTL()'>Hủy</button>\n\
+                               </div>"  ;
+                     document.getElementById("loaitl").innerHTML = kq;       
+              
+             }   
+             
+              function editLoaiTL(loaitailieu){
+
+                var editNganh = document.getElementById("editNganh").value;
+                               
+                var xmlHttp = new XMLHttpRequest();
+
+                xmlHttp.open("GET","jsp/loaitl/updateLoaiTL.jsp?loaitailieu=" + loaitailieu + "&editNganh=" + editNganh ,false);
+                xmlHttp.send();
+                alert("ĐÃ SỬA THÀNH CÔNG");
+                allLoaiTL()
+            
+            }
             
             
             
