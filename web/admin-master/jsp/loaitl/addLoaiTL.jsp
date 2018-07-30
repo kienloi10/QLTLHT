@@ -4,12 +4,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="../Connect.jsp" %>
+
 <%
-    String id= request.getParameter("id");
-  
-    String sql = "DELETE FROM loaitailieu WHERE loaitailieu='"+id+"'";
+
+    String addTenTL= request.getParameter("addTenTL");
+    String addNg= request.getParameter("addNg");
+    
+    String sql = "INSERT INTO loaitailieu(loaitailieu,nganh) VALUES ('"+addTenTL+"','"+addNg+"')";
     stm.executeUpdate(sql);
-//   out.print(id);
          
 %>
 

@@ -13,11 +13,11 @@ and open the template in the editor.
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script>
-            function allLoaiTaiLieu(){
+            function allLoaiTL() {
                 var bd = "";
                 var kq = "";
                 var xmlhttp = new XMLHttpRequest();
-                xmlhttp.open("get", "jsp/loaitailieu/loaitailieu.jsp", false);
+                xmlhttp.open("get", "jsp/loaitl/loaitl.jsp", false);
                 xmlhttp.send();
 
                 var nhan = xmlhttp.responseText.trim();
@@ -30,78 +30,37 @@ and open the template in the editor.
                 kq = "";
                 for (var i = 0; i < bd.length; i++) {
                     
-                    kq +=   "<div class='col-sm-4'>"+bd[i].loaitailieu + "</div>"
+                    kq +=   "<div class='col-sm-4'>"+bd[i].loaitl + "</div>"
                             + "<div class='col-sm-4'>" + bd[i].nganh + "</div>"
                             + "<div class='col-sm-4'>\n\
-                               <button class='btn btn-success' onclick='getLoaiTL(\""+bd[i].loaitailieu+"\")'>Sửa</button>\n\
-                                <button class='btn btn-primary' onclick='delLoaiTL(\""+bd[i].loaitailieu +"\")'>Xóa</button>\n\
-                               </div>"  ;            
-                }    
-                document.getElementById("loaitailieu").innerHTML = kq;
-            }
-            
-            function delLoaiTL(id){
-                
-                if (confirm("Are you sure?"))
-                {
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.open("GET","jsp/loaitailieu/delLoaiTL.jsp?id="+id,false);       
-                    xmlHttp.send();
-          
-                    allLoaiTaiLieu();
-                }
-            }
-            
-            function getLoaiTL(idFind){
-                    console.log(idFind);
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.open("GET","jsp/loaitailieu/1LoaiTL.jsp?loaitailieu="+idFind,false);       
-                    xmlHttp.send();
-                    var nhan = xmlHttp.responseText.trim();
-                    //alert(nhan);
-                    var bd = JSON.parse(nhan);
-                    var kq="";
-                    kq +=   "<div class='col-sm-4'>"+bd.loaitailieu + "</div>"
-                            + "<div class='col-sm-4'><input type='text' id='editNameUser' value='" + bd.nganh + "'></div>"    
-                            + "<div class='col-sm-4'>\n\
-                               <button class='btn btn-success' onclick='editLoaiTL("+bd.loaitailieu+")'>Xác nhận</button>\n\
-                                <button class='btn btn-primary'>Hủy</button>\n\
-                               </div>"  ;
-                     document.getElementById("loaitailieu").innerHTML = kq;    
-            }
-            
-            function editLoaiTL(id){
-                var editNameUser = document.getElementById("editNameUser").value;
-                var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open("GET","jsp/loaitailieu/updateLoaiTL.jsp?id="+id+"&editNameUser= " + editNameUser,true);
-                xmlHttp.send();
-                alert("ĐÃ SỬA THÀNH CÔNG");
-                allLoaiTaiLieu()
-                
+                               <button class='btn btn-success' onclick='getUser(\""+bd[i].loaitl+"\")'>Sửa</button>\n\
+                                <button class='btn btn-primary' onclick='delLoaiTL(\""+bd[i].loaitl+"\")'>Xóa</button>\n\
+                               </div>";            
+                }           
+                document.getElementById("loaitl").innerHTML = kq;
             }
             
             function addLoaiTL(){
-                var addTenTL = document.getElementById("addTenTL").value;
-                var addKNTenTL = document.getElementById("addKNTenTL").value;
-                console.log(addTenTL);
-                console.log(addKNTenTL);
-                
+                var addTL = document.getElementById("addTL").value;
+                var addNg = document.getElementById("addNg").value;            
                 var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open("GET","jsp/loaitailieu/addLoaiTL.jsp?addTenTL="+addTenTL+"&addKNTenTL="+addKNTenTL,true);
+
+                xmlHttp.open("GET","jsp/loaitl/addLoaiTL.jsp?addTenTL="+addTL+"&addNg= " + addNg ,true);
+                xmlHttp.send();
                 alert("ĐÃ THÊM THÀNH CÔNG");
-                var nhan = xmlHttp.responseText;  
-                alert(nhan);
-                allLoaiTaiLieu();
+                allLoaiTL()
             }
+            
+            
+            
+            
+            
             
         </script>
         
-        
     </head>
     <body>
-        <button style="float: right;" class="btn-warning" data-toggle="modal" data-target="#myModal">Add</button><br>    
-            
-        
+        <button style="float: right;" class="btn-warning" data-toggle="modal" data-target="#myModal">Add</button><br>  
         <!-- The Modal -->
         <div class="modal" id="myModal">
           <div class="modal-dialog">
@@ -110,41 +69,43 @@ and open the template in the editor.
               <!-- Modal Header -->
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Thêm Loại tài liệu</h4>
+                <h4 class="modal-title">Thêm Loai tài liệu</h4>
                 
               </div>
 
               <!-- Modal body -->
               <div class="modal-body">
-                  <strong>Tên loại tài liệu</strong><br>
-                  <input type="text" id="addTenTL" value="" ><br>
-                  <strong>Khối ngành</strong><br>
-                  <input type="text" id="addKNTenTL" value="" >
+                  <strong>Loại tài liệu</strong><br>
+                  <input type="text" id="addTL" value="" ><br>
+                  <strong>Ngành</strong><br>
+                  <input type="text" id="addNg" value="" ><br>                
               </div>
-
               <!-- Modal footer -->
               <div class="modal-footer">
                   <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="addLoaiTL()">THÊM</button>
               </div>
-
             </div>
           </div>
         </div>
         
         
         
+        
+        
         <div class="row ">
-            <div class="col-sm-4"><dt>Tên tài liệu</dt></div>
-            <div class="col-sm-4"><dt>Khối ngành</dt></div>
-            <div class="col-sm-4"><strong>Thao tác</strong></div>
-                             
+            <div class="col-sm-4"><dt>Loại tài liệu</dt></div>
+            <div class="col-sm-4"><dt>Ngành</dt></div>
+            <div class="col-sm-4"><strong>Thao tác</strong></div>                            
         </div>      
         
-        <div id="loaitailieu"></div>
-        <div>
+        <div id="loaitl"></div>
+        
             <script>
-                allLoaiTaiLieu();
+                allLoaiTL();
             </script>
-        </div>
+            
+        
+        
+        
     </body>
 </html>
