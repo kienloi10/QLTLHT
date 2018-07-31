@@ -7,7 +7,7 @@
 <%
     String idFind= request.getParameter("idFind");
     String s ="";
-    String sql = "select USERNAME,PASSWORD ,HOTEN from user WHERE USERNAME='"+idFind+"'";
+    String sql = "select USERNAME,PASSWORD ,HOTEN ,EMAIL,MONEY  from user WHERE USERNAME='"+idFind+"'";
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
         out.print("empty");
@@ -17,7 +17,9 @@
         do {
             s += "\"username\":\"" + rs.getString(1) + "\","         
                     + "\"password\":\"" + rs.getString(2) + "\","
-                    + "\"hoten\":\"" + rs.getString(3) + "\",";
+                    + "\"hoten\":\"" + rs.getString(3) + "\","
+                    + "\"email\":\"" + rs.getString(4) + "\","
+                    + "\"money\":\"" + rs.getString(5) + "\",";
             
         } while(rs.next());
 //        s = s.subSequence(0, s.length() - 1);

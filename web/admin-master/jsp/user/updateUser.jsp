@@ -13,13 +13,15 @@
     String editUser= request.getParameter("editUser");
     String editPwUser= request.getParameter("editPwUser");
     String editName = request.getParameter("editName");
+    String editEmail= request.getParameter("editEmail");
+    String editMoney = request.getParameter("editMoney");
     
 
 //    String editUser="truongloc";
 //    String editPwUser= "truonglocnguyen";
 //    String editName= "Lộc A";
   
-    String sql = "UPDATE user SET password='"+editPwUser+"',hoten='"+editName+"' WHERE username='"+editUser+"'";
+    String sql = "UPDATE user SET password='"+editPwUser+"',hoten='"+editName+"',email='"+editEmail+"',money='"+editMoney+"' WHERE username='"+editUser+"'";
     stm.executeUpdate(sql);
          
 %>

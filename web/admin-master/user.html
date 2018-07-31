@@ -35,10 +35,12 @@ and open the template in the editor.
                 kq = "";
                 for (var i = 0; i < bd.length; i++) {
                     
-                    kq +=   "<div class='col-sm-3'>"+bd[i].username + "</div>"
-                            + "<div class='col-sm-3'>" + bd[i].password + "</div>"
-                            + "<div class='col-sm-3'>" + bd[i].hoten + "</div>"
-                            + "<div class='col-sm-3'>\n\
+                    kq +=   "<div class='col-sm-2'>"+bd[i].username + "</div>"
+                            + "<div class='col-sm-2'>" + bd[i].password + "</div>"
+                            + "<div class='col-sm-2'>" + bd[i].hoten + "</div>"
+                            + "<div class='col-sm-2'>" + bd[i].email + "</div>"
+                            + "<div class='col-sm-2'>" + bd[i].money + "</div>"
+                            + "<div class='col-sm-2'>\n\
                                <button class='btn btn-success' onclick='getUser(\""+bd[i].username+"\")'>Sửa</button>\n\
                                 <button class='btn btn-primary' onclick='delUser(\""+bd[i].username+"\")'>Xóa</button>\n\
                                </div>";            
@@ -68,10 +70,12 @@ and open the template in the editor.
                     var nhan = xmlHttp.responseText.trim();               
                     var bd = JSON.parse(nhan);
                     var kq="";
-                    kq +=   "<div class='col-sm-3'>"+bd.username + "</div>"
-                            + "<div class='col-sm-3'><input type='text' id='editPwUser' value='" + bd.password + "'></div>"
-                            + "<div class='col-sm-3'><input type='text' id='editName' value='" + bd.hoten + "'></div>"
-                            + "<div class='col-sm-3'>\n\
+                    kq +=   "<div class='col-sm-2'>"+bd.username + "</div>"
+                            + "<div class='col-sm-2'><input type='text' id='editPwUser' value='" + bd.password + "'></div>"
+                            + "<div class='col-sm-2'><input type='text' id='editName' value='" + bd.hoten + "'></div>"
+                            + "<div class='col-sm-2'><input type='text' id='editEmail' value='" + bd.email + "'></div>"
+                            + "<div class='col-sm-2'><input type='text' id='editMoney' value='" + bd.money + "'></div>"
+                            + "<div class='col-sm-2'>\n\
                                <button class='btn btn-success' onclick='editUser(\""+bd.username+"\")'>Xác nhận</button>\n\
                                 <button class='btn btn-primary' onclick='allUser()'>Hủy</button>\n\
                                </div>"  ;
@@ -83,11 +87,13 @@ and open the template in the editor.
 
                 var editPwUser = document.getElementById("editPwUser").value;
                 var editName = document.getElementById("editName").value;
+                var editEmail = document.getElementById("editEmail").value;
+                var editMoney = document.getElementById("editMoney").value;
                 
                 
                 var xmlHttp = new XMLHttpRequest();
 
-                xmlHttp.open("GET","jsp/user/updateUser.jsp?editUser=" + editUser + "&editPwUser=" + editPwUser + "&editName="  + editName ,false);
+                xmlHttp.open("GET","jsp/user/updateUser.jsp?editUser=" + editUser + "&editPwUser=" + editPwUser + "&editName="  + editName +"&editEmail="+editEmail+"&editMoney="+editMoney ,false);
                 xmlHttp.send();
                 alert("ĐÃ SỬA THÀNH CÔNG");
                 allUser()
@@ -152,10 +158,12 @@ and open the template in the editor.
         
         
         <div class="row ">
-            <div class="col-sm-3"><dt>Username</dt></div>
-            <div class="col-sm-3"><dt>Password</dt></div>
-            <div class="col-sm-3"><dt>Họ và tên </dt></div>
-            <div class="col-sm-3"><strong>Thao tác</strong></div>
+            <div class="col-sm-2"><dt>Username</dt></div>
+            <div class="col-sm-2"><dt>Password</dt></div>
+            <div class="col-sm-2"><dt>Họ và tên </dt></div>
+            <div class="col-sm-2"><dt>Email</dt></div>
+            <div class="col-sm-2"><dt>Tiền </dt></div>
+            <div class="col-sm-2"><strong>Thao tác</strong></div>
                              
         </div>      
         

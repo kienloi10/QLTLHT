@@ -153,8 +153,10 @@ function kTraGia(giaTL,tenTL){
 //                        myframe.open();
 //                        myframe.write(kq);
 //                        myframe.close();
-                        alert("OK");
+//                        alert("OK");
+                    document.getElementById("nd").innerHTML = kq;
 
+                    
                     }
                 
                 }
@@ -169,7 +171,6 @@ function dangKy(){
     var password_confirm = document.getElementById("conf_password").value.trim();
     var hoten  = document.getElementById("hoten").value.trim();
     var email = document.getElementById("email").value.trim();
-    var sdt = document.getElementById("sdt").value.trim();
 
     if(username !=""){
         if(password != "" && (password == password_confirm)){
@@ -180,7 +181,6 @@ function dangKy(){
                 var userInfo = "username="+username 
                            +"&password=" + password 
                            +"&email=" + email
-                           +"&sdt=" + sdt
                            +"&hoten=" + hoten;
                 xmlHttp.open("GET","assets/jsp/dangky.jsp?"+userInfo ,false);
 //                xmlHttp.setRequestHeader("User_Signup","/userInfo");

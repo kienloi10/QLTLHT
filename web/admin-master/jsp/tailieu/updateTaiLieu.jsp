@@ -9,8 +9,9 @@
     String id= request.getParameter("id");
     String tentl= request.getParameter("tentl");
     String tenfile = request.getParameter("tenfile");
+    String gia = request.getParameter("gia");
 
-    String sql = "UPDATE tailieu SET TENTAILIEU='"+tentl+"',TENFILE='"+tenfile+"' WHERE id="+id;
+    String sql = "UPDATE tailieu SET TENTAILIEU='"+tentl+"',TENFILE='"+tenfile+"',GIA="+gia+" WHERE id="+id;
     stm.executeUpdate(sql);
          
 %>

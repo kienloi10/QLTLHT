@@ -13,7 +13,6 @@ and open the template in the editor.
        
         <script>
             
-
             function tailieu() {
                 var kq = "";
                 var bd = "";
@@ -38,7 +37,6 @@ and open the template in the editor.
                            + "<div class='col-sm-3'><a>"+bd[i].gia + " VNĐ</div>"
                             + "<div class='col-sm-3'><button class='btn-info' onclick='kTraGia(\""+bd[i].gia+"\",\""+bd[i].tentailieu+"\")'>Download</button></div><br>"
                             + "</a>";
-
                 }
                // kq += "";
                 document.getElementById("thongdiep").innerHTML = kq;
@@ -53,14 +51,12 @@ and open the template in the editor.
                     var xmlhttp = new XMLHttpRequest();
                     xmlhttp.open("get", "assets/jsp/giaUser.jsp?ng="+ng, false);
                     xmlhttp.send();
-
                     var nhan = xmlhttp.responseText.trim();
                     console.log(nhan);
                     tienConLai = nhan - giaTL;
                     console.log(tienConLai);
                     if (tienConLai < 0 ){
                         alert("Bạn không đủ tiền download tài liệu này");
-
                     }
                     else{
                         var xmlhttp = new XMLHttpRequest();
@@ -79,7 +75,6 @@ and open the template in the editor.
                             alert("rong");
                         }
                         bd = JSON.parse(nhan);
-
                         kq = "<style> .item{list-style-type: none; border-bottom: 1px solid white;}"
                             + ".item h2{display: inline-block; width: 50%; margin: 0px;font-size: 18px;color: black;}"
                             + ".item p{display: inline-block;width: 10%;font-size: 16px;font-style: oblique; margin: 0px;}"
@@ -87,33 +82,26 @@ and open the template in the editor.
                             + ".filename{display: inline;font-family: serif;font-size: 16px;position: relative;text-decoration: none;font-style: oblique;}"
                             + ".filename:hover{color: #17B22B;}"
                             + "</style>";
-
                 //        alert(bd);
                         kq += '<ul>';
                         for (var i = 0; i < bd.length; i++) {
-
                 //            kq += "<li><h2>" + bd[i].tentailieu + "</h2>"
                 //                    + "<a href='assets/jsp/download.jsp?filename=" + bd[i].tenfile + "'>" + bd[i].tenfile + "</a><br>"
                 //                    + "<h3>Thể loại: </h3>"
                 //                    + "<a>"+ bd[i].tenloaitailieu
                 //                    + "</a></li>";
-
                                 kq +=   "<li class='item'><h2>" + bd[i].tentailieu + "</h2>"
                                             + "<p>Thể loại: </p>"
                                             + "<a class='type'>"+ bd[i].tenloaitailieu
                                             + "<a class='filename' href='assets/jsp/download.jsp?filename=" + bd[i].tenfile + "'>Download</a><br>"
                                             + "</a></li>";
-
                         }
                         kq += "</ul>";
                         document.getElementById("thongdiep").innerHTML = kq;
-
                     }
                 
                 }
             }
-
-
         </script>
 
     </head>

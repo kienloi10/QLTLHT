@@ -34,6 +34,7 @@ and open the template in the editor.
                             + "<div class='col-sm-2'>" + bd[i].tenfile + "</div>"
                             + "<div class='col-sm-2'>" + bd[i].loaitl + "</div>"
                             + "<div class='col-sm-2'>" + bd[i].tenuser + "</div>"
+                            + "<div class='col-sm-2'>" + bd[i].gia + "</div>"
                             + "<div class='col-sm-2'>\n\
                                <button class='btn btn-success' onclick='getTaiLieu("+bd[i].id+")'>Sửa</button>\n\
                                 <button class='btn btn-primary' onclick='delTaiLieu("+bd[i].id+")'>Xóa</button>\n\
@@ -64,6 +65,7 @@ and open the template in the editor.
                             + "<div class='col-sm-2'><input type='text' id='tenfile' value='" + bd.tenfile + "'></div>"
                             + "<div class='col-sm-2'>" + bd.loaitl + "</div>"
                             + "<div class='col-sm-2'>" + bd.tenuser + "</div>"
+                            + "<div class='col-sm-2'><input type='text' id='gia' value='" + bd.gia + "'></div>"
                             + "<div class='col-sm-2'>\n\
                                <button class='btn btn-success' onclick='editTL("+bd.id+")'>Xác nhận</button>\n\
                                 <button class='btn btn-primary' onclick='allTaiLieu()'>Hủy</button>\n\
@@ -75,11 +77,12 @@ and open the template in the editor.
 
                 var tentl = document.getElementById("tentl").value;
                 var tenfile = document.getElementById("tenfile").value;
+                var gia = document.getElementById("gia").value;
                 
                 
                 var xmlHttp = new XMLHttpRequest();
 
-                xmlHttp.open("GET","jsp/tailieu/updateTaiLieu.jsp?id=" + id + "&tentl=" + tentl + "&tenfile="  + tenfile ,false);
+                xmlHttp.open("GET","jsp/tailieu/updateTaiLieu.jsp?id=" + id + "&tentl=" + tentl + "&tenfile="  + tenfile +"&gia=" + gia ,false);
                 xmlHttp.send();
                 alert("ĐÃ SỬA THÀNH CÔNG");
                 allTaiLieu()
@@ -96,6 +99,7 @@ and open the template in the editor.
             <div class="col-sm-2"><dt>File</dt></div>
             <div class="col-sm-2"><dt>Loại </dt></div>
             <div class="col-sm-2"><dt>Người up </dt></div>
+            <div class="col-sm-2"><dt>Giá(VNĐ) </dt></div>
             <div class="col-sm-2"><strong>Thao tác</strong></div>                      
         </div>   
        
