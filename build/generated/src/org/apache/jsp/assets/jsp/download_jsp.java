@@ -63,7 +63,7 @@ public final class download_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write("   \n");
 
-  String filename = request.getParameter("filename");
+  String filename = request.getParameter("filename").trim();
 //  String filename = "html.txt";   
   String filepath = "d:\\Nam 4\\LT web\\QLTLHT\\web\\assets\\uploadfile\\";   
   response.setContentType("APPLICATION/OCTET-STREAM");   

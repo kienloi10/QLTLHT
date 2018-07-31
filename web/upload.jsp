@@ -21,15 +21,17 @@
             var tentl = document.getElementById("tentl").value;
             var loaitl = document.getElementById("datatypes").value;
             var ngdang = sessionStorage.getItem("hoten");
+            var gia = document.getElementById("gia").value;
             var xmlHttp = new XMLHttpRequest();
             console.log(filename);
             console.log(tentl);
             console.log(loaitl);
             console.log(ngdang);
+            console.log(gia);
             
             
 
-            xmlHttp.open("GET","assets/jsp/UpLoad.jsp?filename= " + filename + "&tentl=" + tentl + "&loaitl="  + loaitl + "&ngdang=" + ngdang ,false);
+            xmlHttp.open("GET","assets/jsp/addTL.jsp?filename= " + filename + "&tentl=" + tentl + "&loaitl="  + loaitl + "&ngdang=" + ngdang + "&gia=" + gia ,false);
             xmlHttp.send();
             var kq = xmlHttp.responseText.trim();
 //            alert(kq);
@@ -43,17 +45,21 @@
 
                 
                 <div>
-                <p class="p_in_form">Đường dẫn:</p>
+                <p class="p_in_form">Link:</p>
                 <input name="file" type="file" id="file" multiple required style="background-color: white;">
             </div>
             <div>
-                <p class="p_in_form">Tên tài liệu: </p>
+                <p class="p_in_form">Name: </p>
                 <input type="text" id="tentl" required> <br>
             </div>
             <div style="margin-bottom: 0px;">
-                <p class="p_in_form">Loại tài liệu: </p>
+                <p class="p_in_form">Loai Tai Lieu: </p>
                 <select id="datatypes" style="width: 75%; height: 22px; float: right; margin-top: 12px;" required >    
                 </select>
+            </div>
+            <div>
+                <p class="p_in_form">Giá (VNĐ): </p>
+                <input type="text" id="gia" required placeholder="5000"> <br>
             </div>
 
         <input type="submit" value="Upload" onclick="Upload()">

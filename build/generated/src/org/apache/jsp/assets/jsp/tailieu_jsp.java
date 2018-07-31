@@ -70,7 +70,7 @@ public final class tailieu_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write('\n');
 
     String s ="";
-    String sql = "select tentailieu ,tenfile, loaitl from tailieu ";
+    String sql = "select tentailieu ,tenfile, loaitl,gia from tailieu ";
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
         out.print("empty");
@@ -80,7 +80,8 @@ public final class tailieu_jsp extends org.apache.jasper.runtime.HttpJspBase
         do {
             s += "{\"tentailieu\":\"" + rs.getString("tentailieu") + "\","
                     + "\"tenfile\":\"" + rs.getString("tenfile") + "\","
-                    + "\"loaitl\":\"" + rs.getString("loaitl") + "\"},";
+                    + "\"loaitl\":\"" + rs.getString("loaitl") + "\","
+                    + "\"gia\":\"" + rs.getString("gia") + "\"},";
             
         } while(rs.next());
 //        s = s.subSequence(0, s.length() - 1);

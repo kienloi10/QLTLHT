@@ -1,4 +1,3 @@
-
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.SQLException"%>
 <%@include file="Connect.jsp" %>
@@ -7,7 +6,7 @@
     String tentl= request.getParameter("tentl");
     String loaitl= request.getParameter("loaitl");
     String ngdang = request.getParameter("ngdang");
-
+    String gia = request.getParameter("gia");
 //    String filename = "css.txt";
 //    String tentl= "CSS";
 //    String loaitl= "Lap trinh web";
@@ -20,7 +19,7 @@
     } else {   
             kq = rs.getString(1);
     } 
-    String sql1 = "insert into tailieu(tentailieu,tenfile,loaitl,tenuser) VALUES ('" + tentl + "','"+ filename + "','" + loaitl + "','" + kq +"')";
+    String sql1 = "insert into tailieu(tentailieu,tenfile,loaitl,tenuser,gia) VALUES ('" + tentl + "','"+ filename + "','" + loaitl + "','" + kq +"',"+gia+")";
     try{
         stm.executeUpdate(sql1);
         

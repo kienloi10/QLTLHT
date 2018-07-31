@@ -71,51 +71,106 @@ function timkiem(){
     xmlHttp.open("GET","assets/jsp/timkiem.jsp?timkiem=" + file,false);
     xmlHttp.send();
     var nhan = xmlHttp.responseText.trim();
- //   alert(nhan);           
-        if (nhan === "empty")
-        {
-            alert("rong");
-        }
-        bd = JSON.parse(nhan);
-        
-        kq = "<style> .item{list-style-type: none; border-bottom: 1px solid white;}"
-            + ".item h2{display: inline-block; width: 50%; margin: 0px;font-size: 18px;color: black;}"
-            + ".item p{display: inline-block;width: 10%;font-size: 16px;font-style: oblique; margin: 0px;}"
-            + ".type{display: inline-block; width: 25%;}"
-            + ".filename{display: inline;font-family: serif;font-size: 16px;position: relative;text-decoration: none;font-style: oblique;}"
-            + ".filename:hover{color: #17B22B;}"
-            + "</style>";
+    if (nhan === "empty")
+                {
+                    alert("rong");
+                }
+                bd = JSON.parse(nhan);
+               
+                kq = "";
+                for (var i = 0; i < bd.length; i++) {
+                    
+                    kq +=   "<div class='col-sm-3'><h2>" + bd[i].tentailieu + "</h2></div>"
+                            + "<div class='col-sm-3'>Thể loại:"
+                            + file+"</div>"
+                           + "<div class='col-sm-3'><a>"+bd[i].gia + " VNĐ</div>"
+                            + "<div class='col-sm-3'><button class='btn-info' onclick='kTraGia(\""+bd[i].gia+"\",\""+bd[i].tentailieu+"\")'>Download</button></div><br>"
+                            + "</a>";
 
-//        alert(bd);
-        kq += '<ul>';
-        for (var i = 0; i < bd.length; i++) {
-
-//            kq += "<li><h2>" + bd[i].tentailieu + "</h2>"
-//                    + "<a href='assets/jsp/download.jsp?filename=" + bd[i].tenfile + "'>" + bd[i].tenfile + "</a><br>"
-//                    + "<h3>Thể loại: </h3>"
-//                    + "<a>"+ bd[i].tenloaitailieu
-//                    + "</a></li>";
-
-                kq +=   "<li class='item'><h2>" + bd[i].tentailieu + "</h2>"
-                            + "<p>Thể loại: </p>"
-                            + "<a class='type'>"+ bd[i].tenloaitailieu
-                            + "<a class='filename' href='assets/jsp/download.jsp?filename=" + bd[i].tenfile + "'>Download</a><br>"
-                            + "</a></li>";
-
-        }
-        kq += "</ul>";
-        var myframe = document.getElementById("iframe").contentWindow.document;
-        myframe.open();
-        myframe.write(kq);
-        myframe.close();
+                }
+               // kq += "";
+                var myframe = document.getElementById("iframe").contentWindow.document;
+                myframe.open();
+                myframe.write(kq);
+                myframe.close();
 }
+
+function kTraGia(giaTL,tenTL){
+                if (confirm("Bạn có chắc chắn muốn mua không?")){
+                    var ng = sessionStorage.getItem("hoten");
+                    console.log(giaTL);
+                    console.log(ng);
+                    console.log(tenTL);
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("get", "assets/jsp/giaUser.jsp?ng="+ng, false);
+                    xmlhttp.send();
+
+                    var nhan = xmlhttp.responseText.trim();
+                    console.log(nhan);
+                    tienConLai = nhan - giaTL;
+                    console.log(tienConLai);
+                    if (tienConLai < 0 ){
+                        alert("Bạn không đủ tiền download tài liệu này");
+
+                    }
+                    else{
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open("get", "assets/jsp/thanhtoan.jsp?tenTL="+tenTL+"&tienConLai="+tienConLai+"&giaTL="+giaTL+"&ngMua="+ng, false);
+                        xmlhttp.send();
+                        alert("Đã thanh toán thành công");
+                        var bd="";
+//                      Dowload
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open("get", "assets/jsp/layTL.jsp?tenTL="+tenTL, false);
+                        xmlhttp.send();
+                        var nhan = xmlhttp.responseText.trim();
+         
+                        if (nhan === "empty")
+                        {
+                            alert("rong");
+                        }
+                        bd = JSON.parse(nhan);
+
+                        kq = "<style> .item{list-style-type: none; border-bottom: 1px solid white;}"
+                            + ".item h2{display: inline-block; width: 50%; margin: 0px;font-size: 18px;color: black;}"
+                            + ".item p{display: inline-block;width: 10%;font-size: 16px;font-style: oblique; margin: 0px;}"
+                            + ".type{display: inline-block; width: 25%;}"
+                            + ".filename{display: inline;font-family: serif;font-size: 16px;position: relative;text-decoration: none;font-style: oblique;}"
+                            + ".filename:hover{color: #17B22B;}"
+                            + "</style>";
+
+                        kq += '<ul>';
+                        for (var i = 0; i < bd.length; i++) {
+                                kq +=   "<li class='item'><h2>" + bd[i].tentailieu + "</h2>"
+                                            + "<p>Thể loại: </p>"
+                                            + "<a class='type'>"+ bd[i].tenloaitailieu
+                                            + "<a class='filename' href='assets/jsp/download.jsp?filename=" + bd[i].tenfile + "'>Download</a><br>"
+                                            + "</a></li>";
+
+                        }
+                        kq += "</ul>";
+//                        var myframe = document.getElementById("iframe").contentWindow.document;
+//                        myframe.open();
+//                        myframe.write(kq);
+//                        myframe.close();
+                        alert("OK");
+
+                    }
+                
+                }
+            }
+
+
+
 
 function dangKy(){
     var username = document.getElementById("username").value.trim();
     var password = document.getElementById("password").value.trim();
     var password_confirm = document.getElementById("conf_password").value.trim();
-   // var email = document.getElementById("email").value.trim();
     var hoten  = document.getElementById("hoten").value.trim();
+    var email = document.getElementById("email").value.trim();
+    var sdt = document.getElementById("sdt").value.trim();
+
     if(username !=""){
         if(password != "" && (password == password_confirm)){
             if(hoten != ""){             
@@ -124,13 +179,16 @@ function dangKy(){
 //               xmlHttp.open("GET","assets/jsp/dangky.jsp?userInfo=" + userInfo,true);
                 var userInfo = "username="+username 
                            +"&password=" + password 
-                           //+"&email=" + email 
+                           +"&email=" + email
+                           +"&sdt=" + sdt
                            +"&hoten=" + hoten;
                 xmlHttp.open("GET","assets/jsp/dangky.jsp?"+userInfo ,false);
 //                xmlHttp.setRequestHeader("User_Signup","/userInfo");
                 xmlHttp.send();
                 var result = xmlHttp.responseText;
+                console.log(result);
                 if(result > 0 ){
+                    alert("Đăng ký thành công");
                     xmlHttp.open("GET","dangnhap.html",false);
                     xmlHttp.send();
                     document.write(xmlHttp.responseText);

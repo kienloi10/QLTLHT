@@ -6,7 +6,7 @@
 <%@include file="Connect.jsp" %>
 <%
     String s ="";
-    String sql = "select tentailieu ,tenfile, loaitl from tailieu ";
+    String sql = "select tentailieu ,tenfile, loaitl,gia from tailieu ";
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
         out.print("empty");
@@ -16,7 +16,8 @@
         do {
             s += "{\"tentailieu\":\"" + rs.getString("tentailieu") + "\","
                     + "\"tenfile\":\"" + rs.getString("tenfile") + "\","
-                    + "\"loaitl\":\"" + rs.getString("loaitl") + "\"},";
+                    + "\"loaitl\":\"" + rs.getString("loaitl") + "\","
+                    + "\"gia\":\"" + rs.getString("gia") + "\"},";
             
         } while(rs.next());
 //        s = s.subSequence(0, s.length() - 1);

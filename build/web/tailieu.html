@@ -12,14 +12,15 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
        
         <script>
-            var bd = "";
+            
 
             function tailieu() {
                 var kq = "";
+                var bd = "";
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.open("get", "assets/jsp/tailieu.jsp", false);
                 xmlhttp.send();
-
+                
                 var nhan = xmlhttp.responseText.trim();
                 
                 if (nhan === "empty")
@@ -28,30 +29,95 @@ and open the template in the editor.
                 }
                 bd = JSON.parse(nhan);
                
-                kq = "<ul>";
+                kq = "";
                 for (var i = 0; i < bd.length; i++) {
                     
-                    kq +=   "<li class='item'><h2>" + bd[i].tentailieu + "</h2>"
-                            + "<p>Thể loại: </p>"
-                            + "<a class='type'>"+ bd[i].loaitl
-//                            + "<p>Download:</p>"
-                            + "<a class='filename' href='assets/jsp/download.jsp?filename=" + bd[i].tenfile + "'>Download</a><br>"
-                            + "</a></li>";
+                    kq +=   "<div class='col-sm-3'><h2>" + bd[i].tentailieu + "</h2></div>"
+                            + "<div class='col-sm-3'>Thể loại:"
+                            + bd[i].loaitl+"</div>"
+                           + "<div class='col-sm-3'><a>"+bd[i].gia + " VNĐ</div>"
+                            + "<div class='col-sm-3'><button class='btn-info' onclick='kTraGia(\""+bd[i].gia+"\",\""+bd[i].tentailieu+"\")'>Download</button></div><br>"
+                            + "</a>";
 
                 }
-                kq += "</ul>";
+               // kq += "";
                 document.getElementById("thongdiep").innerHTML = kq;
             }
+            
+            function kTraGia(giaTL,tenTL){
+                if (confirm("Bạn có chắc chắn muốn mua không?")){
+                    var ng = sessionStorage.getItem("hoten");
+                    console.log(giaTL);
+                    console.log(ng);
+                    console.log(tenTL);
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("get", "assets/jsp/giaUser.jsp?ng="+ng, false);
+                    xmlhttp.send();
 
-//'<a href="assets/jsp/download.jsp?filename=' + bd[i].tenloaitailieu + '">'
-//"<a href='assets/jsp/download.jsp?filename=" + bd[i].tenloaitailieu + "'>"
+                    var nhan = xmlhttp.responseText.trim();
+                    console.log(nhan);
+                    tienConLai = nhan - giaTL;
+                    console.log(tienConLai);
+                    if (tienConLai < 0 ){
+                        alert("Bạn không đủ tiền download tài liệu này");
+
+                    }
+                    else{
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open("get", "assets/jsp/thanhtoan.jsp?tenTL="+tenTL+"&tienConLai="+tienConLai+"&giaTL="+giaTL+"&ngMua="+ng, false);
+                        xmlhttp.send();
+                        alert("Đã thanh toán thành công");
+                        var bd="";
+//                      Dowload
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open("get", "assets/jsp/layTL.jsp?tenTL="+tenTL, false);
+                        xmlhttp.send();
+                        var nhan = xmlhttp.responseText.trim();
+         
+                        if (nhan === "empty")
+                        {
+                            alert("rong");
+                        }
+                        bd = JSON.parse(nhan);
+
+                        kq = "<style> .item{list-style-type: none; border-bottom: 1px solid white;}"
+                            + ".item h2{display: inline-block; width: 50%; margin: 0px;font-size: 18px;color: black;}"
+                            + ".item p{display: inline-block;width: 10%;font-size: 16px;font-style: oblique; margin: 0px;}"
+                            + ".type{display: inline-block; width: 25%;}"
+                            + ".filename{display: inline;font-family: serif;font-size: 16px;position: relative;text-decoration: none;font-style: oblique;}"
+                            + ".filename:hover{color: #17B22B;}"
+                            + "</style>";
+
+                //        alert(bd);
+                        kq += '<ul>';
+                        for (var i = 0; i < bd.length; i++) {
+
+                //            kq += "<li><h2>" + bd[i].tentailieu + "</h2>"
+                //                    + "<a href='assets/jsp/download.jsp?filename=" + bd[i].tenfile + "'>" + bd[i].tenfile + "</a><br>"
+                //                    + "<h3>Thể loại: </h3>"
+                //                    + "<a>"+ bd[i].tenloaitailieu
+                //                    + "</a></li>";
+
+                                kq +=   "<li class='item'><h2>" + bd[i].tentailieu + "</h2>"
+                                            + "<p>Thể loại: </p>"
+                                            + "<a class='type'>"+ bd[i].tenloaitailieu
+                                            + "<a class='filename' href='assets/jsp/download.jsp?filename=" + bd[i].tenfile + "'>Download</a><br>"
+                                            + "</a></li>";
+
+                        }
+                        kq += "</ul>";
+                        document.getElementById("thongdiep").innerHTML = kq;
+
+                    }
+                
+                }
+            }
+
+
         </script>
 
     </head>
     <body style="width: 700px;">
-<!--        <a href="download">download file</a>
-        <input type="text" name="name">
-        <input type="submit" value="OK">-->
         <div id="thongdiep"></div>
         
         <div>
@@ -59,26 +125,6 @@ and open the template in the editor.
                 tailieu();
             </script>
         </div>
-        <!--        <div>
-                    <ul>
-                        <li>
-                            <a>Tieu de</a>
-                            <p>Nội dung</p>
-                            <a href="#">Download</a>
-                        </li>
-                        <li>
-                            <a>Tieu de</a>
-                            <p>Nội dung</p>
-                            <a href="#">Download</a>
-                        </li>
-                        <li>
-                            <a>Tieu de</a>
-                            <p>Nội dung</p>
-                            <a href="#">Download</a>
-                        </li>
-                    </ul>
-                    
-                    
-                </div>-->
+       
     </body>
 </html>

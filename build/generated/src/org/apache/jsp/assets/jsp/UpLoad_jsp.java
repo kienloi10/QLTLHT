@@ -52,9 +52,8 @@ public final class UpLoad_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
+      out.write('\n');
+      out.write('\n');
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -70,7 +69,6 @@ public final class UpLoad_jsp extends org.apache.jasper.runtime.HttpJspBase
     String tentl= request.getParameter("tentl");
     String loaitl= request.getParameter("loaitl");
     String ngdang = request.getParameter("ngdang");
-
 //    String filename = "css.txt";
 //    String tentl= "CSS";
 //    String loaitl= "Lap trinh web";
@@ -80,25 +78,19 @@ public final class UpLoad_jsp extends org.apache.jasper.runtime.HttpJspBase
     if (!rs.next()) {
         out.print("empty");
         return;
-    } else {
-        
-        
+    } else {   
             kq = rs.getString(1);
+    } 
+    String sql1 = "insert into tailieu(tentailieu,tenfile,loaitl,tenuser) VALUES ('" + tentl + "','"+ filename + "','" + loaitl + "','" + kq +"')";
+    try{
+        stm.executeUpdate(sql1);
+        
     }
-//    String sql1 = "insert into tailieu(tentailieu,tenfile,loaitl,tenuser) VALUES ('" + tentl + "','"+ filename + "','" + loaitl + "','" + rs +"')";
-//
-//    try{
-//        stm.executeUpdate(sql1);
-//        
-//    }
-//    catch(Exception ex){
-//        System.out.println(ex.toString());
-//    }
+    catch(Exception ex){
+        System.out.println(ex.toString());
+    }
     out.print(kq);
-
-       
  
-    
 
       out.write('\n');
       out.write('\n');
