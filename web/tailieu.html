@@ -9,8 +9,43 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
-       
+<!--        <link rel="stylesheet" type="text/css" href="assets/css/styles.css">-->
+        <script src="assets/javascript/myscripts.js"></script>
+        <style>
+            .gia{
+                margin-left: 85%;
+            }
+             @-webkit-keyframes glowing {
+                   0% { background-color: #add8e6; -webkit-box-shadow: 0 0 3px #add8e6; }
+                   50% { background-color: #f4fafc; -webkit-box-shadow: 0 0 10px #f4fafc; }
+                   100% { background-color: #add8e6; -webkit-box-shadow: 0 0 3px #add8e6; }
+                 }
+
+                 @-moz-keyframes glowing {
+                   0% { background-color: #add8e6; -moz-box-shadow: 0 0 3px #add8e6; }
+                   50% { background-color: #f4fafc; -moz-box-shadow: 0 0 10px #f4fafc; }
+                   100% { background-color: #add8e6; -moz-box-shadow: 0 0 3px #add8e6; }
+                 }
+
+                 @-o-keyframes glowing {
+                   0% { background-color: #add8e6; box-shadow: 0 0 3px #e5e23bv; }
+                   50% { background-color: #f4fafc; box-shadow: 0 0 10px #f4fafc; }
+                   100% { background-color: #add8e6; box-shadow: 0 0 3px #add8e6; }
+                 }
+
+                 @keyframes glowing {
+                   0% { background-color: #add8e6; box-shadow: 0 0 3px #add8e6; }
+                   50% { background-color: #f4fafc; box-shadow: 0 0 10px #f4fafc; }
+                   100% { background-color: #add8e6; box-shadow: 0 0 3px #add8e6; }
+                 }
+
+                 .gia {
+                   -webkit-animation: glowing 1500ms infinite;
+                   -moz-animation: glowing 1500ms infinite;
+                   -o-animation: glowing 1500ms infinite;
+                   animation: glowing 1500ms infinite;
+                 }
+        </style>
         <script>
             
             function tailieu() {
@@ -31,12 +66,12 @@ and open the template in the editor.
                 kq = "";
                 for (var i = 0; i < bd.length; i++) {
                     
-                    kq +=   "<div class='col-sm-3'><h2>" + bd[i].tentailieu + "</h2></div>"
-                            + "<div class='col-sm-3'>Thể loại:"
-                            + bd[i].loaitl+"</div>"
-                           + "<div class='col-sm-3'><a>"+bd[i].gia + " VNĐ</div>"
-                            + "<div class='col-sm-3'><button class='btn-info' onclick='kTraGia(\""+bd[i].gia+"\",\""+bd[i].tentailieu+"\")'>Download</button></div><br>"
-                            + "</a>";
+                    kq +=   "<div><h2>" + bd[i].tentailieu + "</h2></div>"
+                            + "<div><code>Thể loại:"
+                            + bd[i].loaitl+"</code></div>"
+                           + "<div ><a class='gia'>"+bd[i].gia + " VNĐ</a></div>"
+                            + "<div><button class='.btn-info' onclick='kTraGia(\""+bd[i].gia+"\",\""+bd[i].tentailieu+"\")'>MUA</button></div><br>"
+                            + "</a><hr width='100%' align='center' size='10px' color='#1e90ff'>";
                 }
                // kq += "";
                 document.getElementById("thongdiep").innerHTML = kq;
@@ -105,7 +140,16 @@ and open the template in the editor.
         </script>
 
     </head>
-    <body style="width: 700px;">
+    <body style="width: 700px;" onload="loadLoaiTaiLieu()">
+        <p>Tìm Tài Liệu:</p>
+                <div id="timkiem">
+<!--                    <form>-->
+                        <select id="datatypes">   
+                        </select>
+<!--                        <input id="btn_search" type="submit" value="Tìm Kiếm" onclick="timkiem()">-->
+                        <button id="btn_search" onclick="timkiem()">Tìm Kiếm </button>  
+<!--                    </form>-->
+                </div>
         <div id="thongdiep"></div>
         
         <div>

@@ -6,7 +6,7 @@
 <%@include file="../Connect.jsp" %>
 <%
     String s ="";
-    String sql = "select ID,TENTAILIEU,TENFILE ,LOAITL,TENUSER,GIA from TAILIEU ";
+    String sql = "select ID,TENTAILIEU,TENFILE ,LOAITL,TENUSER,GIA ,HOPLE from TAILIEU ORDER BY TENTAILIEU ASC";
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
         out.print("empty");
@@ -19,7 +19,8 @@
                     + "\"tenfile\":\"" + rs.getString(3) + "\","
                     + "\"loaitl\":\"" + rs.getString(4) + "\","
                     + "\"tenuser\":\"" + rs.getString(5) + "\","
-                    + "\"gia\":\"" + rs.getString(6) + "\"},";
+                    + "\"gia\":\"" + rs.getString(6) + "\","                   
+                    + "\"hople\":\"" + rs.getString(7) + "\"},";
             
         } while(rs.next());
 //        s = s.subSequence(0, s.length() - 1);

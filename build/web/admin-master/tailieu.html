@@ -35,14 +35,22 @@ and open the template in the editor.
                             + "<div class='col-sm-2'>" + bd[i].loaitl + "</div>"
                             + "<div class='col-sm-2'>" + bd[i].tenuser + "</div>"
                             + "<div class='col-sm-2'>" + bd[i].gia + "</div>"
-                            + "<div class='col-sm-2'>\n\
+                            + "<div class='col-sm-1'>\n\
                                <button class='btn btn-success' onclick='getTaiLieu("+bd[i].id+")'>Sửa</button>\n\
-                                <button class='btn btn-primary' onclick='delTaiLieu("+bd[i].id+")'>Xóa</button>\n\
-                               </div></div>";            
+                                <button class='btn btn-primary' onclick='delTaiLieu("+bd[i].id+")'>Xóa</button>"
+                    if (bd[i].hople == 0){
+                        kq+="<button class='btn btn-warning' onclick='chanTL("+bd[i].id+")'>Chặn</button>"
+
+                    }else{
+                        kq+="<button class='btn btn-info' onclick='bochanTL("+bd[i].id+")'>Bỏ chặn</button>"
+
+                    }
+                            kq+="</div></div><hr width='100%' align='center' size='100px' color='black'>";            
                 }
            
                 document.getElementById("tailieu").innerHTML = kq;
             }
+            
             
             function delTaiLieu(id){
                 if (confirm("Are you sure?"))
@@ -90,6 +98,25 @@ and open the template in the editor.
                 
             }
             
+            function chanTL(id){
+                if (confirm("Bạn có chắc muốn chặn?"))
+                {
+                    var xmlHttp = new XMLHttpRequest();                    
+                    xmlHttp.open("GET","jsp/tailieu/chanTL.jsp?id="+id,false);       
+                    xmlHttp.send();        
+                    allTaiLieu();
+                }      
+            }
+            
+            function bochanTL(id){
+                if (confirm("Bạn có chắc muốn bỏ chặn?"))
+                {
+                    var xmlHttp = new XMLHttpRequest();                    
+                    xmlHttp.open("GET","jsp/tailieu/bochanTL.jsp?id="+id,false);       
+                    xmlHttp.send();        
+                    allTaiLieu();
+                }      
+            }
             
         </script>
     </head>

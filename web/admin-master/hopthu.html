@@ -68,10 +68,12 @@ and open the template in the editor.
                     if (bd[i].duyet == 1){
                         kq +="<p style='color:red;float:right;'>Đã duyệt</p>";
                     }else{
-                        kq +="<p class='text' style='float:right;'>Chưa duyệt</p>";
+                        kq +="<p class='text' style='float:right;'>Mới</p>";
                     }
-                    kq +="</p><code>Người gửi:"+bd[i].ngdang+"</code></br>Nội dung:<pre><br> " + bd[i].noidung + 
-                    "</pre></br><button class= 'btn btn-danger' style='float:right;' onclick='duyet(" + bd[i].id + ")'>DUYỆT</button></p><br><br><hr width='100%' align='center' size='100px' color='black'>";            
+                    kq +="</p><code>Người gửi:"+bd[i].ngdang+"</code></br>Nội dung:<pre><br> " + bd[i].noidung + "</pre></br>"
+                    if (bd[i].duyet == 0){
+                        kq +="<button class= 'btn btn-danger' style='float:right;' onclick='duyet(" + bd[i].id + ")'>DUYỆT</button></p><br><br><hr width='100%' align='center' size='100px' color='black'>";            
+                    }
                 }
                 
                

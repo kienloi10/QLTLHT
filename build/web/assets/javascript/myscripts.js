@@ -89,10 +89,11 @@ function timkiem(){
 
                 }
                // kq += "";
-                var myframe = document.getElementById("iframe").contentWindow.document;
-                myframe.open();
-                myframe.write(kq);
-                myframe.close();
+//                var myframe = document.getElementById("iframe").contentWindow.document;
+//                myframe.open();
+//                myframe.write(kq);
+//                myframe.close();
+                document.getElementById("thongdiep").innerHTML = kq;
 }
 
 function kTraGia(giaTL,tenTL){
@@ -209,13 +210,12 @@ function dangKy(){
         alert("'Username' không được để trống!");
     }
 }
-//function Deletetl(){
-////    var yes = confirm("Xác nhận xóa tài liệu!");
-////    if(yes){
-////        alert("OK");
-////    } else {
-////        alert("A");
-////    }
-//    alert("aaaa");
-//    
-//}
+function ktrTK(){
+    var ng = sessionStorage.getItem("hoten");
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET","assets/jsp/ktTK.jsp?ng=" + ng,false);
+    xmlHttp.send();
+    var nhan = xmlHttp.responseText.trim();
+    alert("Tài khoản bạn đang có số tiền: "+nhan+"VNĐ");
+
+}

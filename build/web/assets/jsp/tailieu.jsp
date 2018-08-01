@@ -6,7 +6,7 @@
 <%@include file="Connect.jsp" %>
 <%
     String s ="";
-    String sql = "select tentailieu ,tenfile, loaitl,gia from tailieu ";
+    String sql = "select tentailieu ,tenfile, loaitl,gia from tailieu where hople=0 ORDER BY ID DESC";
     ResultSet rs = stm.executeQuery(sql);
     if (!rs.next()) {
         out.print("empty");
