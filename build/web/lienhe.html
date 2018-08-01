@@ -9,40 +9,58 @@ and open the template in the editor.
         <title>Liên hệ</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <style>
-            h1{
-                text-align: center;
+            #contact{
+                background-color: #add8e6;
+                height: 880px;
+            }
+            
+        </style>
+        
+        <script>
+            function send(){
+                var chude = document.getElementById("chude").value.trim();
+                var noidung = document.getElementById("noidung").value.trim();
+                var ngdang = sessionStorage.getItem("hoten");
+                console.log(chude);
+                console.log(noidung);
+                console.log(ngdang);
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET","assets/jsp/lienhe.jsp?chude= " + chude + "&noidung=" + noidung + "&ngdang="  + ngdang,false);
+                xmlHttp.send();
+                var kq = xmlHttp.responseText.trim();
+                console.log(kq);
+                alert("Đã gửi thành công");
                 
             }
-            .avatar{
-                width: 100px;
-                height: 100px;
-                display: inline-block;
-                float: right;
-            }
-            .hoten,.description{
-                display: inline-block;
-                width: 60%;
-                position: relative;
-            }
-            .hoten{
-                margin: 0px;
-                margin-left: 10%;
-            }
-        </style>
+            
+            
+            
+            
+        </script>
     </head>
     <body>
-        <h1>WEB Quản Lý Tài Liệu Học Tập</h1>
-        <hr>
-        <div class="member">
-            <img class="avatar" src="assets/pictures/kienloi.jpg" >
-            <h2 class="hoten">Đổng Kiến Lợi</h2>
-            <pre class="description">
-                Email: kienloi10@gmail.com.
-                Phone: 0979x xxx xxx.
-            </pre>
-            <hr>
-        </div>
+
+    <div id="contact" class="container-fluid bg-grey">
+			<h2 class="text-center"><strong>LIÊN HỆ</strong></h2>		
+				<div class="col-sm-7 slideanim">
+					<div class="row">
+						<div class="col-sm-6 form-group">
+							<input class="form-control" id="chude" name="name" placeholder="Chủ đề" type="text" required>
+						</div>
+						
+					</div>
+					<textarea class="form-control" id="noidung" name="contact" placeholder="Nội dung" rows="5"></textarea><br>
+					<div class="row">
+			        <div class="col-sm-12 form-group">
+			          <button class="btn btn-default pull-right"  onclick="send()">Send</button>
+			        </div>
+				</div>
+			</div>
+		</div>
         
     </body>
 </html>

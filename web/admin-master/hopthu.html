@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+         
+                  @-webkit-keyframes glowing {
+                   0% { background-color: #e5e23b; -webkit-box-shadow: 0 0 3px #e5e23b; }
+                   50% { background-color: #aaff00; -webkit-box-shadow: 0 0 10px #aaff00; }
+                   100% { background-color: #e5e23b; -webkit-box-shadow: 0 0 3px #e5e23b; }
+                 }
+
+                 @-moz-keyframes glowing {
+                   0% { background-color: #e5e23b; -moz-box-shadow: 0 0 3px #e5e23b; }
+                   50% { background-color: #aaff00; -moz-box-shadow: 0 0 10px #aaff00; }
+                   100% { background-color: #e5e23b; -moz-box-shadow: 0 0 3px #e5e23b; }
+                 }
+
+                 @-o-keyframes glowing {
+                   0% { background-color: #e5e23b; box-shadow: 0 0 3px #e5e23b; }
+                   50% { background-color: #aaff00; box-shadow: 0 0 10px #aaff00; }
+                   100% { background-color: #e5e23b; box-shadow: 0 0 3px #e5e23b; }
+                 }
+
+                 @keyframes glowing {
+                   0% { background-color: #e5e23b; box-shadow: 0 0 3px #e5e23b; }
+                   50% { background-color: #aaff00; box-shadow: 0 0 10px #aaff00; }
+                   100% { background-color: #e5e23b; box-shadow: 0 0 3px #e5e23b; }
+                 }
+
+                 .text {
+                   -webkit-animation: glowing 1500ms infinite;
+                   -moz-animation: glowing 1500ms infinite;
+                   -o-animation: glowing 1500ms infinite;
+                   animation: glowing 1500ms infinite;
+                 }
+                 
+        </style>
+        <script>
+            function hopthu(){
+                var bd = "";
+                var kq = "";
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("get", "jsp/hopthu/hopthu.jsp", false);
+                xmlhttp.send();
+
+                var nhan = xmlhttp.responseText.trim();
+                
+                if (nhan === "empty")
+                {
+                    alert("rong");
+                }
+                bd = JSON.parse(nhan);
+                ;
+                for (var i = 0; i < bd.length; i++) {
+                    
+                    kq +="<p><a>CHỦ ĐỀ</a><big>: " + bd[i].chude +"</big>";
+                    if (bd[i].duyet == 1){
+                        kq +="<p style='color:red;float:right;'>Đã duyệt</p>";
+                    }else{
+                        kq +="<p class='text' style='float:right;'>Chưa duyệt</p>";
+                    }
+                    kq +="</p><code>Người gửi:"+bd[i].ngdang+"</code></br>Nội dung:<pre><br> " + bd[i].noidung + 
+                    "</pre></br><button class= 'btn btn-danger' style='float:right;' onclick='duyet(" + bd[i].id + ")'>DUYỆT</button></p><br><br><hr width='100%' align='center' size='100px' color='black'>";            
+                }
+                
+               
+                document.getElementById("hopthu").innerHTML = kq;
+            }
+            
+            function duyet(id){
+                if (confirm("Bạn chắc chắn đã duyệt?"))
+                {
+                    
+                    var xmlHttp = new XMLHttpRequest();
+                    
+                    xmlHttp.open("GET","jsp/hopthu/duyet.jsp?id="+id,false);       
+                    xmlHttp.send();        
+                    hopthu();
+                }
+            }
+            
+            
+        </script>
+        
+    </head>
+    <body>
+          
+        
+        <div id="hopthu"></div>
+        
+            <script>
+                hopthu();
+            </script>
+        
+    </body>
+</html>

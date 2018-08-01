@@ -19,7 +19,7 @@
     } else {   
             kq = rs.getString(1);
     } 
-    String sql1 = "insert into tailieu(tentailieu,tenfile,loaitl,tenuser,gia) VALUES ('" + tentl + "','"+ filename + "','" + loaitl + "','" + kq +"',"+gia+")";
+    String sql1 = "insert into tailieu(tentailieu,tenfile,loaitl,tenuser,lan,hople,gia) VALUES ('" + tentl + "','"+ filename + "','" + loaitl + "','" + kq +"',0,0,"+gia+")";
     try{
         stm.executeUpdate(sql1);
         
